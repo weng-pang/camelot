@@ -8,7 +8,7 @@ class ArticlesController extends AppController
         parent::initialize();
         $this->Auth->allow(['tags']);
     }
-    
+
     public function index()
     {
         $this->loadComponent('Paginator');
@@ -28,9 +28,7 @@ class ArticlesController extends AppController
         if ($this->getRequest()->is('post')) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
 
-            // Hardcoding the user_id is temporary, and will be removed later
-            // when we build authentication out.
-            $article->user_id = 1;
+            $article->user_id = $this->Auth->user('id');
 
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been saved.'));
@@ -54,20 +52,15 @@ class ArticlesController extends AppController
             ->contain('Tags') // load associated Tags
             ->firstOrFail();
         if ($this->getRequest()->is(['post', 'put'])) {
-            $this->Articles->patchEntity($article, $this->request->getData());
+            $this->Articles->patchEntity($article, $this->getRequest()->getData(), [
+                'accessibleFields' => ['user_id' => false]
+            ]);
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to update your article.'));
         }
-
-        // Get a list of tags.
-        $tags = $this->Articles->Tags->find('list');
-
-        // Set tags to the view context
-        $this->set('tags', $tags);
-
         $this->set('article', $article);
     }
 
