@@ -20,7 +20,7 @@ class ArticlesController extends AppController
     {
         $article = $this->Articles->newEntity();
         if ($this->getRequest()->is('post')) {
-            $article = $this->Articles->patchEntity($article, $this->getRequest()->getData());
+            $article = $this->Articles->patchEntity($article, $this->request->getData());
 
             // Hardcoding the user_id is temporary, and will be removed later
             // when we build authentication out.
@@ -32,20 +32,35 @@ class ArticlesController extends AppController
             }
             $this->Flash->error(__('Unable to add your article.'));
         }
+        // Get a list of tags.
+        $tags = $this->Articles->Tags->find('list');
+
+        // Set tags to the view context
+        $this->set('tags', $tags);
+
         $this->set('article', $article);
     }
 
     public function edit($slug)
     {
-        $article = $this->Articles->findBySlug($slug)->firstOrFail();
+        $article = $this->Articles
+            ->findBySlug($slug)
+            ->contain('Tags') // load associated Tags
+            ->firstOrFail();
         if ($this->getRequest()->is(['post', 'put'])) {
-            $this->Articles->patchEntity($article, $this->getRequest()->getData());
+            $this->Articles->patchEntity($article, $this->request->getData());
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('Your article has been updated.'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Unable to update your article.'));
         }
+
+        // Get a list of tags.
+        $tags = $this->Articles->Tags->find('list');
+
+        // Set tags to the view context
+        $this->set('tags', $tags);
 
         $this->set('article', $article);
     }
