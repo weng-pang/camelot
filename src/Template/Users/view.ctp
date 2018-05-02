@@ -27,9 +27,6 @@
             <td><?= h($user->password) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($user->id) ?></td>
-        </tr>
         <tr>
             <th scope="row"><?= __('Mobile Phone') ?></th>
             <td><?= $this->Number->format($user->mobile_phone) ?></td>

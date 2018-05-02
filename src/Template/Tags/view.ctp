@@ -23,10 +23,6 @@
             <td><?= h($tag->title) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($tag->id) ?></td>
-        </tr>
-        <tr>
             <th scope="row"><?= __('Created') ?></th>
             <td><?= h($tag->created) ?></td>
         </tr>
