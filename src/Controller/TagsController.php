@@ -12,6 +12,12 @@ use App\Controller\AppController;
  */
 class TagsController extends AppController
 {
+    public function initialize()
+    {
+        parent::initialize();
+        $this->viewBuilder()->setLayout('admin');
+    }
+
 
     /**
      * Index method

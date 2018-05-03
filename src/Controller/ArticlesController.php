@@ -7,6 +7,7 @@ class ArticlesController extends AppController
     {
         parent::initialize();
         $this->Auth->allow(['tags']);
+        $this->viewBuilder()->setLayout('admin');
     }
 
     public function index()

@@ -16,6 +16,7 @@ class UsersController extends AppController
     {
         parent::initialize();
         $this->Auth->allow(['logout', 'add']);
+        $this->viewBuilder()->setLayout('admin');
     }
 
     public function isAuthorized($user) {
