@@ -68,6 +68,10 @@ class UsersTable extends Table
             ->requirePresence('password', 'create')
             ->notEmpty('password');
 
+        $validator
+            ->integer('mobile_phone')
+            ->allowEmpty('mobile_phone');
+
         return $validator;
     }
 
