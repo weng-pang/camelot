@@ -17,7 +17,14 @@ class HomeController extends AppController
     public function index()
     {
         $this->loadComponent('Paginator');
-        $articles = $this->Paginator->paginate($this->Articles->find());
+        $articles = $this->Paginator->paginate(
+            $this->Articles->find(), [
+                'limit' => 4,
+                'order' => [
+                    'Articles.created' => 'DESC',
+                ]
+            ]
+        );
         $this->set(compact('articles'));
     }
 
