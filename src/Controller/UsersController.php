@@ -18,6 +18,21 @@ class UsersController extends AppController
         $this->Auth->allow(['logout', 'add']);
     }
 
+    public function isAuthorized($user) {
+        // TODO: Check if $user is an admin user. If so, they can do anything here. Otherwise, you can just edit/view your own profile.
+
+        // All other actions require a slug.
+        $id = $this->getRequest()->getParam('pass.0');
+        if (!$id) {
+            return false;
+        }
+
+        // Check that the user to view/edit belongs to the current user.
+        $foundUser = $this->Users->get($id);
+
+        return $foundUser && $foundUser->id === $user['id'];
+    }
+
     public function logout()
     {
         $this->Flash->success('You are now logged out.');
