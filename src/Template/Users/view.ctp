@@ -16,7 +16,7 @@
     </ul>
 </nav>
 <div class="users view large-9 medium-8 columns content">
-    <h3><?= h($user->id) ?></h3>
+    <h3><?= h($user->email) ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Email') ?></th>
@@ -45,8 +45,7 @@
         <?php if (!empty($user->articles)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
+                <th scope="col"><?= __('Created By') ?></th>
                 <th scope="col"><?= __('Title') ?></th>
                 <th scope="col"><?= __('Slug') ?></th>
                 <th scope="col"><?= __('Body') ?></th>
@@ -57,7 +56,6 @@
             </tr>
             <?php foreach ($user->articles as $articles): ?>
             <tr>
-                <td><?= h($articles->id) ?></td>
                 <td><?= h($articles->user->email) ?></td>
                 <td><?= h($articles->title) ?></td>
                 <td><?= h($articles->slug) ?></td>
