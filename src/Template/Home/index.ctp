@@ -1,6 +1,6 @@
 
-<h1 class="my-4">Page Heading
-    <small>Secondary Text</small>
+<h1 class="my-4">CMS Articles
+    <small></small>
 </h1>
 
 <?php foreach($articles as $article): ?>
