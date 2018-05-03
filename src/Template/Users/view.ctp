@@ -58,7 +58,7 @@
             <?php foreach ($user->articles as $articles): ?>
             <tr>
                 <td><?= h($articles->id) ?></td>
-                <td><?= h($articles->user_id) ?></td>
+                <td><?= h($articles->user->email) ?></td>
                 <td><?= h($articles->title) ?></td>
                 <td><?= h($articles->slug) ?></td>
                 <td><?= h($articles->body) ?></td>
