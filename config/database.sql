@@ -38,9 +38,14 @@ CREATE TABLE articles_tags (
 
 INSERT INTO users (email, password, created, modified)
 VALUES
-('cakephp@example.com', 'sekret', NOW(), NOW());
+('root@example.com', '$2y$10$g/gbftSdcZpuFYbwqYD5de4AWFuwG1pXykGo1Qc..hVZcEN/96ryG', NOW(), NOW());
 
 INSERT INTO articles (user_id, title, slug, body, published, created, modified)
 VALUES
-(1, 'First Post', 'first-post', 'This is the first post.', 1, now(), now());
+(1, 'First Post', 'first-post', 'This is the first post.', 1, now(), now()),
+(1, 'Second Post', 'second-post', 'This is the second post.', 1, now(), now()),
+(1, 'Third Post', 'third-post', 'This is the third post.', 1, now(), now()),
+(1, 'Fourth Post', 'fourth-post', 'This is the fourth post.', 1, now(), now()),
+(1, 'Fifth Post', 'fifth-post', 'This is the fifth post.', 1, now(), now()),
+(1, 'Sixth Post', 'sixth-post', 'This is the sixth post.', 1, now(), now());
 
