@@ -39,6 +39,8 @@ use Cake\Database\Type;
 use Cake\Datasource\ConnectionManager;
 use Cake\Error\ErrorHandler;
 use Cake\Http\ServerRequest;
+use Cake\I18n\FrozenTime;
+use Cake\I18n\Time;
 use Cake\Log\Log;
 use Cake\Mailer\Email;
 use Cake\Utility\Inflector;
@@ -215,3 +217,6 @@ Type::build('timestamp')
 if (Configure::read('debug')) {
     Plugin::load('DebugKit', ['bootstrap' => true]);
 }
+
+Time::setToStringFormat('d/m/Y');
+FrozenTime::setToStringFormat('d/m/Y');
