@@ -17,7 +17,6 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('title') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
@@ -27,7 +26,6 @@
         <tbody>
             <?php foreach ($tags as $tag): ?>
             <tr>
-                <td><?= $this->Number->format($tag->id) ?></td>
                 <td><?= h($tag->title) ?></td>
                 <td><?= h($tag->created) ?></td>
                 <td><?= h($tag->modified) ?></td>
