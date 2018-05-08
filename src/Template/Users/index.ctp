@@ -32,7 +32,7 @@
                 <td><?= $this->Number->format($user->id) ?></td>
                 <td><?= h($user->email) ?></td>
                 <td><?= h($user->password) ?></td>
-                <td><?= $this->Number->format($user->mobile_phone) ?></td>
+                <td><?= h($user->mobile_phone) ?></td>
                 <td><?= h($user->created->nice()) ?></td>
                 <td><?= h($user->modified->timeAgoInWords()) ?></td>
                 <td class="actions">
