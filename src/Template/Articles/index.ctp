@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var \App\Model\Entity\Article[] $articles
+ */
+?>
 <h1>Articles</h1>
 
 <div>
@@ -14,8 +20,6 @@
                 <th></th>
             </tr>
         </thead>
-
-        <!-- Here is where we iterate through our $articles query object, printing out article info -->
         <tbody>
             <?php foreach ($articles as $article): ?>
                 <tr>
@@ -26,16 +30,8 @@
                         <?= $article->created->timeAgoInWords() ?>
                     </td>
                     <td class="action-col">
-                        <?= $this->Html->link(
-                                '<i class="fa fa-edit"></i> Edit',
-                                ['action' => 'edit', $article->slug],
-                                ['class' => 'btn btn-oval btn-primary', 'escape' => false]
-                            ) ?>
-                        <?= $this->Form->postLink(
-                            '<i class="fa fa-trash"></i> Delete',
-                            ['action' => 'delete', $article->slug],
-                            ['confirm' => 'Are you sure?', 'class' => 'btn btn-oval btn-delete btn-danger', 'escape' => false])
-                        ?>
+                        <?= $this->element('Admin/Buttons/edit', ['url' => ['action' => 'edit', $article->slug]]) ?>
+                        <?= $this->element('Admin/Buttons/delete', ['url' => ['action' => 'delete', $article->slug]]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
