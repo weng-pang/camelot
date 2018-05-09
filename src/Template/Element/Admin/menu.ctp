@@ -8,7 +8,7 @@
 $links = [
     [
         'label' => 'Dashboard',
-        'controller' => 'Users',
+        'controller' => 'Admin',
         'action' => 'index',
         'icon' => 'home',
     ],
