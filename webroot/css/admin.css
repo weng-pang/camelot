@@ -23,7 +23,7 @@
  * accidentally clicked. As such, we make it smaller and push it slightly to the right away from other buttons to
  * its left.
  */
-.table .action-col .btn-delete {
+.btn-delete {
     margin-left: 12px;
     font-size: 0.8em;
 }
