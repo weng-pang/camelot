@@ -1,3 +1,6 @@
+<?php
+$this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
+?>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -17,44 +20,34 @@
     <div class="auth-container">
         <div class="card">
             <header class="auth-header">
-                <h1 class="auth-title">IE CMS</h1>
+                <h1 class="auth-title">
+                    <?= $this->Html->link('IE CMS', ['controller' => 'Home', 'action' => 'index']);?>
+                </h1>
             </header>
             <div class="auth-content">
+
                 <?= $this->Flash->render() ?>
+
                 <p class="text-center">LOGIN TO CONTINUE</p>
-                <?php
-                echo $this->Form->create(null, [
-                    'id' => 'login-form',
-                    'url' => ['controller' => 'Users', 'action' => 'login'],
-                ]);
-                ?>
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="email" class="form-control underlined" name="username" id="username" placeholder="Your email address" required> </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control underlined" name="password" id="password" placeholder="Your password" required> </div>
-                    <div class="form-group">
-                        <label for="remember">
-                            <input class="checkbox" id="remember" type="checkbox">
-                            <span>Remember me</span>
-                        </label>
-                        <a href="reset.html" class="forgot-btn pull-right">Forgot password?</a>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-block btn-primary">Login</button>
-                    </div>
-                    <div class="form-group">
-                        <p class="text-muted text-center">Do not have an account?
-                            <a href="signup.html">Sign Up!</a>
-                        </p>
-                    </div>
+
+                <?= $this->Form->create(null, ['id' => 'login-form', 'url' => ['controller' => 'Users', 'action' => 'login']]); ?>
+                <?= $this->Form->control('email', ['placeholder' => 'Your email address', 'required']);?>
+                <?= $this->Form->control('password', ['placeholder' => 'Your password', 'required']);?>
+                <?= $this->Form->control('remember', ['type' => "checkbox", 'label' => "Remember Me", 'hiddenField' => false]); ?>
+                <div class="form-group">
+                    <?= $this->Html->link("Forgot password?", ['action' => 'resetPassword'], ['class' => 'forgot-btn pull-right']); ?>
+                </div>
+                <?= $this->Form->submit('Login'); ?>
+                <div class="form-group">
+                    <p class="text-muted text-center">Do not have an account?
+                        <?= $this->Html->link('Sign Up!', ['action' => 'create']); ?>
+                    </p>
+                </div>
                 <?php echo $this->Form->end(); ?>
             </div>
         </div>
         <div class="text-center">
-            <a href="index.html" class="btn btn-secondary btn-sm">
-                <i class="fa fa-arrow-left"></i> Back to dashboard </a>
+            <?= $this->Html->link('<i class="fa fa-arrow-left"></i> Home', ['controller' => 'Home', 'action' => 'index'], ['class' => 'btn btn-secondary btn-sm', 'escape' => false]); ?>
         </div>
     </div>
 </div>
