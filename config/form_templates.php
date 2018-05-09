@@ -19,15 +19,17 @@ return [
              * more like what the "Modular Admin HTML" template (https://github.com/modularcode/modular-admin-html) uses.
              */
             'inputContainer' => '<div class="form-group">{{content}}</div>',
-            'label' => '<label {{attrs}}><span>{{text}}</span></label>',
+            'label' => '<label class="control-label" {{attrs}}><span>{{text}}</span></label>',
             'input' => '<input type="{{type}}" name="{{name}}" class="form-control underlined" {{attrs}}/>',
+            'textarea' => '<textarea name="{{name}}" class="form-control underlined" {{attrs}}>{{value}}</textarea>',
 
             // The additional "<span>" here is because the "Modular Admin HTML template does some magic with regards to
             // styling checkboxes. It actually hides the real checkbox, and replaces it with a fancy box that it styles
             // itself.
             'checkbox' => '<input type="checkbox" class="checkbox" name="{{name}}" value="{{value}}"{{attrs}}><span></span>',
 
-            'inputSubmit' => '<button type="{{type}}" class="btn btn-block btn-primary" {{atrs}}>Login</button>',
+            'inputSubmit' => '<input type="{{type}}" class="btn btn-block btn-primary" {{atrs}} />',
+            'button' => '<button class="btn btn-primary" {{atrs}}>{{text}}</button>',
         ],
     ],
 ];

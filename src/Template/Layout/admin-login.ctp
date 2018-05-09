@@ -1,6 +1,3 @@
-<?php
-$this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
-?>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>

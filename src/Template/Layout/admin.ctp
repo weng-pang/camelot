@@ -1,3 +1,6 @@
+<?php
+$this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
+?>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -8,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php echo $this->Html->css('lib/template/admin/vendor.css'); ?>
     <?php echo $this->Html->css('lib/template/admin/app.css'); ?>
+    <?php echo $this->Html->css('admin.css'); ?>
 </head>
 <body>
 
@@ -174,9 +178,12 @@
         <div class="sidebar-overlay" id="sidebar-overlay"></div>
         <div class="sidebar-mobile-menu-handle" id="sidebar-mobile-menu-handle"></div>
         <div class="mobile-menu-handle"></div>
+
         <article class="content dashboard-page">
+            <?= $this->Flash->render(); ?>
             <?= $this->fetch('content'); ?>
         </article>
+
         <footer class="footer">
             <div class="footer-block buttons">
                 <iframe class="footer-github-btn" src="https://ghbtns.com/github-btn.html?user=modularcode&repo=modular-admin-html&type=star&count=true" frameborder="0" scrolling="0" width="140px" height="20px"></iframe>
@@ -268,5 +275,7 @@
 
 <?php echo $this->Html->script('lib/template/admin/vendor.js'); ?>
 <?php echo $this->Html->script('lib/template/admin/app.js'); ?>
+<?php echo $this->Html->script('lib/jquery.validate.min.js'); ?>
+<?php echo $this->fetch('script'); ?>
 </body>
 </html>

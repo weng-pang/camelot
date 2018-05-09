@@ -44,6 +44,8 @@ class ArticlesController extends AppController
         $this->set('tags', $tags);
 
         $this->set('article', $article);
+
+        $this->render('edit');
     }
 
     public function edit($slug)

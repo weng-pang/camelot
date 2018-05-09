@@ -13,3 +13,17 @@
     color: #067600;
     background-color: #e3ffdf;
 }
+
+.table .action-col {
+    text-align: right;
+}
+
+/*
+ * Delete buttons should be harder to click. They should not be right next to other buttons where they may get
+ * accidentally clicked. As such, we make it smaller and push it slightly to the right away from other buttons to
+ * its left.
+ */
+.table .action-col .btn-delete {
+    margin-left: 12px;
+    font-size: 0.8em;
+}
