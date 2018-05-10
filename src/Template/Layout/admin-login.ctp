@@ -25,7 +25,7 @@
 
                 <?= $this->Flash->render() ?>
 
-                <p class="text-center">LOGIN TO CONTINUE</p>
+                <p class="text-center">Login to continue</p>
 
                 <?= $this->Form->create(null, ['id' => 'login-form', 'url' => ['controller' => 'Users', 'action' => 'login']]); ?>
                 <?= $this->Form->control('email', ['placeholder' => 'Your email address', 'required']);?>
@@ -34,12 +34,7 @@
                 <div class="form-group">
                     <?= $this->Html->link("Forgot password?", ['action' => 'resetPassword'], ['class' => 'forgot-btn pull-right']); ?>
                 </div>
-                <?= $this->Form->submit('Login'); ?>
-                <div class="form-group">
-                    <p class="text-muted text-center">Do not have an account?
-                        <?= $this->Html->link('Sign Up!', ['action' => 'create']); ?>
-                    </p>
-                </div>
+                <?= $this->Form->button('Login'); ?>
                 <?php echo $this->Form->end(); ?>
             </div>
         </div>

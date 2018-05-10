@@ -27,3 +27,8 @@
     margin-left: 12px;
     font-size: 0.8em;
 }
+
+/* All except the first title need space above them to separate parts of the dashboard from eachother. */
+.dashboard-page .title-block:not(:first-child) {
+    margin-top: 32px;
+}
