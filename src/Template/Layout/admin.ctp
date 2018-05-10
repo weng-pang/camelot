@@ -72,8 +72,14 @@ $this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
             <?= $this->Flash->render(); ?>
             <?= $this->fetch('content'); ?>
         </article>
+        <footer class="footer">
+            <div class="footer-block">
+                <?= $this->element('page-source') ?>
+            </div>
+        </footer>
     </div>
 </div>
+
 
 <?php echo $this->Html->script('lib/template/admin/vendor.js'); ?>
 <?php echo $this->Html->script('lib/template/admin/app.js'); ?>
