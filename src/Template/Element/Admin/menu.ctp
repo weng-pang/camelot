@@ -48,6 +48,12 @@ $links = [
             ],
         ]
     ],
+    [
+        'label' => 'Settings',
+        'controller' => 'Admin',
+        'action' => 'settings',
+        'icon' => 'settings',
+    ],
 ]
 ?>
 

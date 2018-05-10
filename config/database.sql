@@ -47,6 +47,15 @@ CREATE TABLE article_views (
   FOREIGN KEY article_view_article_key(article_id) REFERENCES articles(id)
 );
 
+CREATE TABLE settings (
+  id INT AUTO_INCREMENT NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  subtitle VARCHAR(255),
+  PRIMARY KEY (id)
+);
+
+INSERT INTO settings (title, subtitle) VALUES ('IE CMS', 'It\'s a CMS, for IE!');
+
 INSERT INTO users (email, password, created, modified)
 VALUES
 ('root@example.com', '$2y$10$g/gbftSdcZpuFYbwqYD5de4AWFuwG1pXykGo1Qc..hVZcEN/96ryG', NOW(), NOW());
