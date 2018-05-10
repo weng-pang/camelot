@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var \App\Model\Entity\Settings $settings
+ */
+
 $this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
 ?>
 <!doctype html>
@@ -53,7 +57,7 @@ $this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
             <div class="sidebar-container">
                 <div class="sidebar-header">
                     <div class="brand">
-                        <?= $this->Html->link('IE CMS', ['controller' => 'home']) ?>
+                        <?= $this->Html->link($settings->title, ['controller' => 'home']) ?>
                     </div>
                 </div>
                 <?= $this->element('Admin/menu'); ?>

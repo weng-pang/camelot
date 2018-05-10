@@ -60,7 +60,7 @@ class AdminController extends AppController
             if ($this->Settings->save($settings)) {
                 $this->Flash->success(__('The setting has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'settings']);
             }
             $this->Flash->error(__('The setting could not be saved. Please, try again.'));
         }

@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
 /**
  * Application Controller
@@ -70,4 +71,15 @@ class AppController extends Controller
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
     }
+
+    public function beforeFilter(Event $event)
+    {
+        // We really want the site settings to be available in any template.
+        // This achieves that (see https://stackoverflow.com/a/1384697).
+        $this->set('settings', TableRegistry::get('Settings')->find()->firstOrFail());
+
+        return parent::beforeFilter($event);
+    }
+
+
 }

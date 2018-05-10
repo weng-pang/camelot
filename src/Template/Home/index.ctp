@@ -2,10 +2,11 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Article[] $articles
+ * @var \App\Model\Entity\Settings $settings
  */
 ?>
-<?php $this->assign('heading', 'IE CMS') ?>
-<?php $this->assign('subheading', 'It\'s a CMS, for IE!') ?>
+<?php $this->assign('heading', $settings->title) ?>
+<?php $this->assign('subheading', $settings->subtitle) ?>
 <?php foreach($articles as $article): ?>
     <div class="post-preview">
         <a href="<?= $this->Url->build(['controller' => 'articles', 'action' => 'view', $article->slug]) ?>">
