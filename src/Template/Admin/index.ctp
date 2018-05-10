@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="card-block">
-                    <?= h($article['body']) ?>
+                    <?= h($this->Text->truncate($article['body'], 50, ['exact' => false])) ?>
                 </div>
                 <div class="card-footer">
                     <?= $this->element('Admin/Buttons/view', ['url' => ['controller' => 'articles', 'action' => 'view', $article['slug']]]) ?>
