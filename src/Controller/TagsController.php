@@ -18,6 +18,10 @@ class TagsController extends AppController
         $this->viewBuilder()->setLayout('admin');
     }
 
+    public function isAuthorized($user)
+    {
+        return $user['id'] > 0;
+    }
 
     /**
      * Index method
@@ -64,8 +68,8 @@ class TagsController extends AppController
             }
             $this->Flash->error(__('The tag could not be saved. Please, try again.'));
         }
-        $articles = $this->Tags->Articles->find('list', ['limit' => 200]);
-        $this->set(compact('tag', 'articles'));
+        $this->set(compact('tag'));
+        $this->render('edit');
     }
 
     /**
@@ -89,8 +93,7 @@ class TagsController extends AppController
             }
             $this->Flash->error(__('The tag could not be saved. Please, try again.'));
         }
-        $articles = $this->Tags->Articles->find('list', ['limit' => 200]);
-        $this->set(compact('tag', 'articles'));
+        $this->set(compact('tag'));
     }
 
     /**
