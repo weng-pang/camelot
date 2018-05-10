@@ -7,6 +7,7 @@ class HomeController extends AppController
     {
         parent::initialize();
         $this->loadModel('Articles');
+        $this->Auth->allow(['index']);
     }
 
 
