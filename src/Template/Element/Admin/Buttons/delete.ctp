@@ -7,7 +7,7 @@
 
 echo $this->Form->postLink(
     '<i class="fa fa-trash"></i> Delete',
-    $disabled ? [] : $url,
+    isset($disabled) && $disabled ? [] : $url,
     [
         'class' => 'btn btn-oval btn-danger btn-delete',
         'escape' => false,

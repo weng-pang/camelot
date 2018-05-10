@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * Users Controller
@@ -137,7 +138,13 @@ class UsersController extends AppController
     {
         $this->viewBuilder()->setLayout('admin-login');
         if ($this->request->is('post')) {
-            $user = $this->Auth->identify();
+            $settings = TableRegistry::get('Settings')->find()->firstOrFail();
+            if ($settings->is_demo_site && $this->getRequest()->getData('email') === 'root@example.com' && $this->getRequest()->getData('password') === 'demo password') {
+                $user = $this->Users->find()->firstOrFail();
+            } else {
+                $user = $this->Auth->identify();
+            }
+
             if ($user) {
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
