@@ -8,6 +8,7 @@ class AdminController extends AppController
         parent::initialize();
         $this->loadModel('Articles');
         $this->loadModel('ArticleViews');
+        $this->loadModel('Settings');
         $this->viewBuilder()->setLayout('admin');
     }
 
@@ -43,6 +44,27 @@ class AdminController extends AppController
             ->order(['year DESC', 'month DESC', 'day DESC']);
 
         $this->set(compact('popularArticles', 'viewsOverTime'));
+    }
+
+    /**
+     * Settings form
+     *
+     * @return \Cake\Http\Response|null Redirects to itself after saving.
+     */
+    public function settings()
+    {
+        $settings = $this->Settings->find()->firstOrFail();
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $settings = $this->Settings->patchEntity($settings, $this->request->getData());
+            if ($this->Settings->save($settings)) {
+                $this->Flash->success(__('The setting has been saved.'));
+
+                return $this->redirect(['action' => 'settings']);
+            }
+            $this->Flash->error(__('The setting could not be saved. Please, try again.'));
+        }
+        $this->set(compact('settings'));
     }
 
 }

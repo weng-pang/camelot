@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\Model\Entity\Settings $settings
+ */
+?>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -18,7 +23,7 @@
         <div class="card">
             <header class="auth-header">
                 <h1 class="auth-title">
-                    <?= $this->Html->link('IE CMS', ['controller' => 'Home', 'action' => 'index']);?>
+                    <?= $this->Html->link($settings->title, ['controller' => 'Home', 'action' => 'index']);?>
                 </h1>
             </header>
             <div class="auth-content">

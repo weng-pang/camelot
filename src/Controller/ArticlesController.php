@@ -12,8 +12,7 @@ class ArticlesController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->Auth->allow(['tags']);
-        $this->Auth->allow(['view']);
+        $this->Auth->allow(['tags', 'view']);
         $this->loadModel('ArticleViews');
         $this->viewBuilder()->setLayout('admin');
     }
@@ -112,22 +111,7 @@ class ArticlesController extends AppController
 
     public function isAuthorized($user)
     {
-        $action = $this->getRequest()->getParam('action');
-        // The add and tags actions are always allowed to logged in users.
-        if (in_array($action, ['add', 'tags'])) {
-            return true;
-        }
-
-        // All other actions require a slug.
-        $slug = $this->getRequest()->getParam('pass.0');
-        if (!$slug) {
-            return false;
-        }
-
-        // Check that the article belongs to the current user.
-        $article = $this->Articles->findBySlug($slug)->first();
-
-        return $article->user_id === $user['id'];
+        return $user['id'] > 0;
     }
 
 }

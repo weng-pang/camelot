@@ -66,9 +66,9 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="<?= $this->fetch('heading-class', 'page-heading') ?>">
-                    <h1><?= $this->fetch('heading', 'IE CMS') ?></h1>
+                    <h1><?= $this->fetch('heading') ?></h1>
                     <?php if ($this->fetch('subheading')): ?>
-                        <h2 class="subheading"><?= $this->fetch('subheading', 'It\'s a CMS, for IE') ?></h2>
+                        <h2 class="subheading"><?= $this->fetch('subheading') ?></h2>
                     <?php endif ?>
                     <?php if ($this->fetch('meta')): ?>
                         <span class="meta"><?= $this->fetch('meta') ?></span>

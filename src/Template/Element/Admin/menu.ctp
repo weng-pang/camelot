@@ -1,62 +1,54 @@
 <?php
-
-/**
- * This template works hand-in-hand with the Admin/menu-item.ctp template. This file is responsible for defining
- * all the links which need to be displayed in the menu, whereas the menu-item.ctp template is responsible for rendering
- * a specific link in the menu.
+/*
+ * What page is the user currently viewing? We need to know this so that we can highlight the correct menu item,
+ * to provide visual feedback to the user about where they are in the website.
  */
-$links = [
-    [
-        'label' => 'Dashboard',
-        'controller' => 'Admin',
-        'action' => 'index',
-        'icon' => 'home',
-    ],
-    [
-        'label' => 'Content',
-        'icon' => 'file',
-        'controller' => 'Articles',
-        'action' => 'index',
-        'children' => [
-            [
-                'label' => 'View content',
-                'controller' => 'Articles',
-                'action' => 'index',
-            ],
-            [
-                'label' => 'Add content',
-                'controller' => 'Articles',
-                'action' => 'add',
-            ],
-        ]
-    ],
-    [
-        'label' => 'Users',
-        'icon' => 'user',
-        'controller' => 'Users',
-        'action' => 'index',
-        'children' => [
-            [
-                'label' => 'View users',
-                'controller' => 'Users',
-                'action' => 'index',
-            ],
-            [
-                'label' => 'Add user',
-                'controller' => 'Users',
-                'action' => 'add',
-            ],
-        ]
-    ],
-]
+$currentController = $this->request->getParam('controller');
+$currentAction = $this->request->getParam('action');
+
+$isDashboardActive  = $currentController === 'Admin' && $currentAction === 'index';
+$isContentActive  = $currentController === 'Articles';
+$isUsersActive  = $currentController === 'Users';
+$isSettingsActive  = $currentController === 'Admin' && $currentAction === 'settings';
 ?>
 
 <nav class="menu">
     <ul class="sidebar-menu metismenu" id="sidebar-menu">
-        <?php
-        foreach($links as $link) {
-            echo $this->element('Admin/menu-item', $link);
-        }
-        ?>
+        <li class="<?= $isDashboardActive ? 'active' : '' ?>">
+            <?= $this->Html->link(
+                    '<i class="fa fa-home"></i> Dashboard',
+                    ['controller' => 'admin'],
+                    ['escape' => false]
+            ) ?>
+        </li>
+        <li class="<?= $isContentActive ? 'active open' : '' ?>">
+            <?= $this->Html->link(
+                    '<i class="fa fa-file"></i> Content <i class="fa arrow"></i>',
+                    ['controller' => 'articles'],
+                    ['escape' => false]
+            ) ?>
+            <ul class="sidebar-nav">
+                <li><?= $this->Html->link('View articles', ['controller' => 'articles']) ?></li>
+                <li><?= $this->Html->link('Add new article', ['controller' => 'articles', 'action' => 'add']) ?></li>
+            </ul>
+        </li>
+        <li class="<?= $isUsersActive ? 'active open' : '' ?>">
+            <?= $this->Html->link(
+                    '<i class="fa fa-user"></i> Users <i class="fa arrow"></i>',
+                    ['controller' => 'users'],
+                    ['escape' => false]
+            ) ?>
+            <ul class="sidebar-nav">
+                <li><?= $this->Html->link('View users', ['controller' => 'users']) ?></li>
+                <li><?= $this->Html->link('Add new user', ['controller' => 'users', 'action' => 'add']) ?></li>
+            </ul>
+        </li>
+        <li class="<?= $isSettingsActive ? 'active' : '' ?>">
+            <?= $this->Html->link(
+                '<i class="fa fa-cog"></i> Settings',
+                ['controller' => 'admin', 'action' => 'settings'],
+                ['escape' => false]
+            ) ?>
+        </li>
     </ul>
 </nav>
