@@ -1,7 +1,7 @@
 <?php
 /**
  * Used to customize the output of the FormHelper class (e.g. $this->Form->control('username')).
- * Refer to the documentation at  https://api.cakephp.org/3.6/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig
+ * Refer to the documentation at https://api.cakephp.org/3.6/class-Cake.View.Helper.FormHelper.html#%24_defaultConfig
  * to see which different templates we can configure and examples of what the template should look like.
  */
 return [
@@ -22,6 +22,7 @@ return [
             'label' => '<label class="control-label" {{attrs}}><span>{{text}}</span></label>',
             'input' => '<input type="{{type}}" name="{{name}}" class="form-control underlined" {{attrs}}/>',
             'textarea' => '<textarea name="{{name}}" class="form-control underlined" {{attrs}}>{{value}}</textarea>',
+            'selectMultiple' => '<select name="{{name}}[]" class="chosen" multiple="multiple"{{attrs}}>{{content}}</select>',
 
             // The additional "<span>" here is because the "Modular Admin HTML template does some magic with regards to
             // styling checkboxes. It actually hides the real checkbox, and replaces it with a fancy box that it styles

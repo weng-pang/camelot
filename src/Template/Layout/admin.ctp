@@ -15,6 +15,7 @@ $this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php echo $this->Html->css('lib/template/admin/vendor.css'); ?>
     <?php echo $this->Html->css('lib/template/admin/app.css'); ?>
+    <?php echo $this->Html->css('lib/chosen.min.css'); ?>
     <?php echo $this->Html->css('admin.css'); ?>
 </head>
 <body>
@@ -84,6 +85,12 @@ $this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
 <?php echo $this->Html->script('lib/template/admin/vendor.js'); ?>
 <?php echo $this->Html->script('lib/template/admin/app.js'); ?>
 <?php echo $this->Html->script('lib/jquery.validate.min.js'); ?>
+<?php echo $this->Html->script('lib/chosen.jquery.min.js'); ?>
 <?php echo $this->fetch('script'); ?>
+<script>
+    (function() {
+        $('select.chosen').chosen({width: '50%'});
+    })();
+</script>
 </body>
 </html>

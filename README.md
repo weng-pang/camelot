@@ -13,3 +13,7 @@ Home screen image of Milky Way by [Alan Labisch](https://unsplash.com/photos/6ea
 ## Admin dashboard plotting library
 
 [c3](http://c3js.org/) licensed under the MIT license.
+
+## Misc libraries
+
+[Chosen](https://github.com/harvesthq/chosen) used under the MIT license.

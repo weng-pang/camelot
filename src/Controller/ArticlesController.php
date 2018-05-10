@@ -2,6 +2,7 @@
 namespace App\Controller;
 use App\Model\Entity\ArticleView;
 use App\Model\Table\ArticlesTable;
+use App\Model\Table\ArticleViewsTable;
 
 /**
  * @property ArticlesTable $Articles
@@ -50,12 +51,10 @@ class ArticlesController extends AppController
             }
             $this->Flash->error(__('Unable to add your article.'));
         }
-        // Get a list of tags.
+
         $tags = $this->Articles->Tags->find('list');
 
-        // Set tags to the view context
         $this->set('tags', $tags);
-
         $this->set('article', $article);
 
         $this->render('edit');
@@ -77,6 +76,10 @@ class ArticlesController extends AppController
             }
             $this->Flash->error(__('Unable to update your article.'));
         }
+
+        $tags = $this->Articles->Tags->find('list');
+
+        $this->set('tags', $tags);
         $this->set('article', $article);
     }
 
