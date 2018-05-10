@@ -5,6 +5,16 @@ namespace App\Model\Entity;
 use Cake\Collection\Collection;
 use Cake\ORM\Entity;
 
+/**
+ * @property int $id
+ * @property string $title
+ * @property string $body
+ * @property string $slug
+ * @property \Cake\I18n\FrozenTime $created
+ * @property \Cake\I18n\FrozenTime $modified
+ *
+ * @property \App\Model\Entity\Article[] $articles
+ */
 class Article extends Entity
 {
     protected $_accessible = [
