@@ -7,31 +7,42 @@ class AdminController extends AppController
     {
         parent::initialize();
         $this->loadModel('Articles');
+        $this->loadModel('ArticleViews');
         $this->viewBuilder()->setLayout('admin');
     }
 
     public function isAuthorized($user)
     {
         // If you are a user, you can access this dashboard.
-        return (boolean) $user->id;
+        return $user->id > 0;
     }
 
     public function index()
     {
-        $query = $this->Articles->find();
-        $popularArticles = $query->select([
+        $popularQuery = $this->Articles->find();
+        $popularArticles = $popularQuery->select([
                 'id' => 'Articles.id',
                 'body' => 'Articles.body',
                 'slug' => 'Articles.slug',
                 'title' => 'Articles.title',
-                'views' => $query->func()->count('ArticleViews.id'),
+                'views' => $popularQuery->func()->count('ArticleViews.id'),
             ])
             ->innerJoinWith('ArticleViews')
             ->group(['Articles.id'])
             ->order(['views DESC'])
             ->limit(3);
 
-        $this->set(compact('popularArticles'));
+        $timeQuery = $this->ArticleViews->find();
+        $viewsOverTime = $timeQuery->select([
+                'views' => $timeQuery->func()->count('ArticleViews.id'),
+                'day' => $timeQuery->func()->extract('DAY', 'ArticleViews.created'),
+                'month' => $timeQuery->func()->extract('MONTH', 'ArticleViews.created'),
+                'year' => $timeQuery->func()->extract('YEAR', 'ArticleViews.created'),
+            ])
+            ->group(['year', 'month', 'day'])
+            ->order(['year DESC', 'month DESC', 'day DESC']);
+
+        $this->set(compact('popularArticles', 'viewsOverTime'));
     }
 
 }
