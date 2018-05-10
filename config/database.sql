@@ -36,6 +36,17 @@ CREATE TABLE articles_tags (
     FOREIGN KEY article_key(article_id) REFERENCES articles(id)
 );
 
+CREATE TABLE article_views (
+  id INT AUTO_INCREMENT NOT NULL,
+  user_id INT NOT NULL,
+  article_id INT NOT NULL,
+  created DATETIME,
+  modified DATETIME,
+  PRIMARY KEY (id),
+  FOREIGN KEY article_view_user_key(user_id) REFERENCES users(id),
+  FOREIGN KEY article_view_article_key(article_id) REFERENCES articles(id)
+);
+
 INSERT INTO users (email, password, created, modified)
 VALUES
 ('root@example.com', '$2y$10$g/gbftSdcZpuFYbwqYD5de4AWFuwG1pXykGo1Qc..hVZcEN/96ryG', NOW(), NOW());
@@ -49,3 +60,31 @@ VALUES
 (1, 'Fifth Post', 'fifth-post', 'This is the fifth post.', 1, now(), now()),
 (1, 'Sixth Post', 'sixth-post', 'This is the sixth post.', 1, now(), now());
 
+INSERT INTO article_views (user_id, article_id, created, modified)
+VALUES
+(1, 1, now(), now()),
+(1, 1, now() - INTERVAL 1 DAY, now()),
+(1, 1, now() - INTERVAL 1 DAY, now()),
+(1, 1, now() - INTERVAL 2 DAY, now()),
+(1, 1, now() - INTERVAL 2 DAY, now()),
+(1, 2, now() - INTERVAL 2 DAY, now()),
+(1, 2, now() - INTERVAL 4 DAY, now()),
+(1, 2, now() - INTERVAL 4 DAY, now()),
+(1, 2, now() - INTERVAL 4 DAY, now()),
+(1, 2, now() - INTERVAL 4 DAY, now()),
+(1, 2, now() - INTERVAL 4 DAY, now()),
+(1, 2, now() - INTERVAL 5 DAY, now()),
+(1, 2, now() - INTERVAL 5 DAY, now()),
+(1, 2, now() - INTERVAL 5 DAY, now()),
+(1, 2, now(), now()),
+(1, 3, now(), now()),
+(1, 3, now() - INTERVAL 1 DAY, now()),
+(1, 3, now() - INTERVAL 6 DAY, now()),
+(1, 3, now() - INTERVAL 6 DAY, now()),
+(1, 3, now() - INTERVAL 6 DAY, now()),
+(1, 3, now() - INTERVAL 6 DAY, now()),
+(1, 3, now() - INTERVAL 6 DAY, now()),
+(1, 3, now() - INTERVAL 10 DAY, now()),
+(1, 3, now() - INTERVAL 10 DAY, now()),
+(1, 3, now() - INTERVAL 10 DAY, now()),
+(1, 3, now() - INTERVAL 10 DAY, now());

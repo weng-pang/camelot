@@ -88,6 +88,7 @@ class UsersController extends AppController
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $this->set(compact('user'));
+        $this->render('edit');
     }
 
     /**
@@ -103,7 +104,14 @@ class UsersController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
+
+            // Don't try to save a blank password when editing an existing user and they didn't submit a password.
+            // What has really happened is they edited the user, but opted not to change the password.
+            $data = $this->request->getData();
+            if (!$data['password']) {
+                unset($data['password']);
+            }
+            $user = $this->Users->patchEntity($user, $data);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
@@ -136,6 +144,7 @@ class UsersController extends AppController
 
     public function login()
     {
+        $this->viewBuilder()->setLayout('admin-login');
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {

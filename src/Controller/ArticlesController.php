@@ -1,12 +1,19 @@
 <?php
 namespace App\Controller;
+use App\Model\Entity\ArticleView;
+use App\Model\Table\ArticlesTable;
 
+/**
+ * @property ArticlesTable $Articles
+ * @property ArticleViewsTable $ArticleViews
+ */
 class ArticlesController extends AppController
 {
     public function initialize()
     {
         parent::initialize();
         $this->Auth->allow(['tags']);
+        $this->loadModel('ArticleViews');
         $this->viewBuilder()->setLayout('admin');
     }
 
@@ -20,6 +27,11 @@ class ArticlesController extends AppController
     public function view($slug = null)
     {
         $article = $this->Articles->findBySlug($slug)->firstOrFail();
+        $view = new ArticleView([
+            'article_id' => $article->id,
+            'user_id' => $this->Auth->user()['id']
+        ]);
+        $this->ArticleViews->save($view);
         $this->set(compact('article'));
     }
 
@@ -44,6 +56,8 @@ class ArticlesController extends AppController
         $this->set('tags', $tags);
 
         $this->set('article', $article);
+
+        $this->render('edit');
     }
 
     public function edit($slug)

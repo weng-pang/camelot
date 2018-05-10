@@ -1,0 +1,34 @@
+.message {
+    margin: 12px 4px;
+    padding: 24px 12px;
+    text-align: center;
+}
+
+.error {
+    color: #b10000;
+    background-color: #ffdddd;
+}
+
+.success {
+    color: #067600;
+    background-color: #e3ffdf;
+}
+
+.table .action-col {
+    text-align: right;
+}
+
+/*
+ * Delete buttons should be harder to click. They should not be right next to other buttons where they may get
+ * accidentally clicked. As such, we make it smaller and push it slightly to the right away from other buttons to
+ * its left.
+ */
+.btn-delete {
+    margin-left: 12px;
+    font-size: 0.8em;
+}
+
+/* All except the first title need space above them to separate parts of the dashboard from eachother. */
+.dashboard-page .title-block:not(:first-child) {
+    margin-top: 32px;
+}

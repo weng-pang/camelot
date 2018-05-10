@@ -13,6 +13,7 @@ class ArticlesTable extends Table
         $this->addBehavior('Timestamp');
         $this->belongsToMany('Tags');
         $this->belongsTo('Users');
+        $this->hasMany('ArticleViews');
     }
 
     public function validationDefault(Validator $validator)

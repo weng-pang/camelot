@@ -1,63 +1,77 @@
 <?php
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         0.10.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
-
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
 ?>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="no-js" lang="en">
 <head>
-    <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
-    </title>
-    <?= $this->Html->meta('icon') ?>
-
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('style.css') ?>
-
-    <?= $this->Html->script('lib/jquery-3.3.1.min') ?>
-    <?= $this->Html->script('lib/jquery.validate.min') ?>
-
-    <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title><?php echo $this->fetch('title'); ?></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?php echo $this->Html->css('lib/template/admin/vendor.css'); ?>
+    <?php echo $this->Html->css('lib/template/admin/app.css'); ?>
+    <?php echo $this->Html->css('admin.css'); ?>
 </head>
 <body>
-    <nav class="top-bar expanded" data-topbar role="navigation">
-        <ul class="title-area large-3 medium-4 columns">
-            <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
-            </li>
-        </ul>
-        <div class="top-bar-section">
-            <ul class="right">
-                <?php if ($this->request->getSession()->read('Auth.User')): ?>
-                    <li><?= $this->Html->link('Logout', ['controller' => 'users', 'action' => 'logout']);?></li>
-                <?php endif ?>
-                <li><a target="_blank" href="https://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
-            </ul>
-        </div>
-    </nav>
-    <?= $this->Flash->render() ?>
-    <div class="container clearfix">
-        <?= $this->fetch('content') ?>
+
+<div class="main-wrapper">
+    <div class="app" id="app">
+        <header class="header">
+            <div class="header-block header-block-collapse d-lg-none d-xl-none">
+                <button class="collapse-btn" id="sidebar-collapse-btn">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+            <div class="header-block header-block-search">
+            </div>
+            <div class="header-block header-block-buttons">
+            </div>
+            <div class="header-block header-block-nav">
+                <ul class="nav-profile">
+                    <li class="profile dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="name"> <?= $this->request->getSession()->read('Auth.User.email'); ?></span>
+                        </a>
+                        <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <?= $this->Html->link(
+                                '<i class="fa fa-user icon"></i> Profile',
+                                ['controller' => 'users', 'action' => 'edit', $this->request->getSession()->read('Auth.User.id')],
+                                ['class' => 'dropdown-item', 'escape' => false]
+                            ) ?>
+                            <?= $this->Html->link(
+                                    '<i class="fa fa-power-off icon"></i> Logout',
+                                    ['controller' => 'users', 'action' => 'logout'],
+                                    ['class' => 'dropdown-item', 'escape' => false]
+                            );?>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <aside class="sidebar">
+            <div class="sidebar-container">
+                <div class="sidebar-header">
+                    <div class="brand">IE CMS</div>
+                </div>
+                <?= $this->element('Admin/menu'); ?>
+            </div>
+            <footer class="sidebar-footer">
+            </footer>
+        </aside>
+        <div class="sidebar-mobile-menu-handle" id="sidebar-mobile-menu-handle"></div>
+        <div class="mobile-menu-handle"></div>
+
+        <article class="content dashboard-page">
+            <?= $this->Flash->render(); ?>
+            <?= $this->fetch('content'); ?>
+        </article>
     </div>
-    <footer>
-    </footer>
+</div>
+
+<?php echo $this->Html->script('lib/template/admin/vendor.js'); ?>
+<?php echo $this->Html->script('lib/template/admin/app.js'); ?>
+<?php echo $this->Html->script('lib/jquery.validate.min.js'); ?>
+<?php echo $this->fetch('script'); ?>
 </body>
 </html>

@@ -1,13 +1,30 @@
-<h1>Edit Article</h1>
 <?php
-echo $this->Form->create($article, ['id' => 'article-form']);
-echo $this->Form->control('title');
-echo $this->Form->control('body', ['rows' => '3']);
-echo $this->Form->control('tag_string', ['type' => 'text']);
-echo $this->Form->button(__('Save Article'));
-echo $this->Form->end();
+/**
+ * @var \App\View\AppView $this
+ * @var \App\Model\Entity\Article $article
+ */
 ?>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-block">
+            <div class="title-block">
+                <h3 class="title"><?= $article->id ? 'Edit' : 'Add' ?> Article</h3>
+            </div>
 
+            <?php
+            echo $this->Form->create($article, ['id' => 'article-form']);
+            echo $this->Form->control('title');
+            echo $this->Form->control('body', ['rows' => '3']);
+            echo $this->Form->control('tag_string', ['type' => 'text', 'label' => 'Tags (comma separated)']);
+            echo $this->Form->button(__('Save Article'));
+            echo $this->Form->end();
+            ?>
+
+        </div>
+    </div>
+</div>
+
+<?php $this->start('script'); ?>
 <script>
     (function() {
         $("#article-form").validate({
@@ -24,3 +41,4 @@ echo $this->Form->end();
         });
     })();
 </script>
+<?php $this->end(); ?>
