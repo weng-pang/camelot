@@ -4,6 +4,8 @@
  * @var \App\Model\Entity\Article[] $articles
  */
 ?>
+<?php $this->assign('heading', 'IE CMS') ?>
+<?php $this->assign('subheading', 'It\'s a CMS, for IE!') ?>
 <?php foreach($articles as $article): ?>
     <div class="post-preview">
         <a href="<?= $this->Url->build(['controller' => 'articles', 'action' => 'view', $article->slug]) ?>">

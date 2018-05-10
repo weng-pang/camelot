@@ -13,6 +13,7 @@ class ArticlesController extends AppController
     {
         parent::initialize();
         $this->Auth->allow(['tags']);
+        $this->Auth->allow(['view']);
         $this->loadModel('ArticleViews');
         $this->viewBuilder()->setLayout('admin');
     }
@@ -32,6 +33,7 @@ class ArticlesController extends AppController
             'user_id' => $this->Auth->user()['id']
         ]);
         $this->ArticleViews->save($view);
+        $this->viewBuilder()->setLayout('default');
         $this->set(compact('article'));
     }
 

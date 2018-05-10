@@ -29,7 +29,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="index.html">Home</a>
+        <?= $this->Html->link('Home', ['controller' => 'home', 'action' => 'index'], ['class' => 'navbar-brand']) ?>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fa fa-bars"></i>
@@ -48,14 +48,19 @@
 </nav>
 
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('img/home-bg.jpg')">
+<header class="masthead" style="background-image: url('/img/home-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="site-heading">
-                    <h1>IE CMS</h1>
-                    <span class="subheading">It's a CMS, for IE</span>
+                <div class="<?= $this->fetch('heading-class', 'page-heading') ?>">
+                    <h1><?= $this->fetch('heading', 'IE CMS') ?></h1>
+                    <?php if ($this->fetch('subheading')): ?>
+                        <h2 class="subheading"><?= $this->fetch('subheading', 'It\'s a CMS, for IE') ?></h2>
+                    <?php endif ?>
+                    <?php if ($this->fetch('meta')): ?>
+                        <span class="meta"><?= $this->fetch('meta') ?></span>
+                    <?php endif ?>
                 </div>
             </div>
         </div>
