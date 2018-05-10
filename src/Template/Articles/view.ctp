@@ -1,4 +1,19 @@
-<h1><?= h($article->title) ?></h1>
-<p><?= h($article->body) ?></p>
-<p><small>Created: <?= $article->created->format(DATE_RFC850) ?></small></p>
-<p><?= $this->Html->link('Edit', ['action' => 'edit', $article->slug]) ?></p>
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var \App\Model\Entity\Article $article
+ */
+?>
+<?php $this->assign('heading-class', 'post-heading') ?>
+<?php $this->assign('heading', $article->title) ?>
+<?php $this->assign('meta', "Posted on {$article->created->toFormattedDateString()}") ?>
+
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <?= h($article->body) ?>
+            </div>
+        </div>
+    </div>
+</article>

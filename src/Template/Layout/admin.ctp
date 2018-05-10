@@ -52,7 +52,9 @@ $this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
         <aside class="sidebar">
             <div class="sidebar-container">
                 <div class="sidebar-header">
-                    <div class="brand">IE CMS</div>
+                    <div class="brand">
+                        <?= $this->Html->link('IE CMS', ['controller' => 'home']) ?>
+                    </div>
                 </div>
                 <?= $this->element('Admin/menu'); ?>
             </div>

@@ -32,3 +32,15 @@
 .dashboard-page .title-block:not(:first-child) {
     margin-top: 32px;
 }
+
+.sidebar-header .brand a {
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    display: block;
+    text-decoration: none;
+}
+
+.sidebar-header .brand a:hover {
+    text-decoration: underline;
+}

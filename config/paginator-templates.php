@@ -1,7 +1,8 @@
 <?php
 return [
     'prevDisabled' => '',
-    'prevActive' => '<li class="page-item"><a class="page-link" href="{{url}}">&larr; Older</a></li>',
     'nextDisabled' => '',
-    'nextActive' => '<li class="page-item"><a class="page-link" href="{{url}}">Newer &rarr;</a></li>',
+    // Because we are sorting in reverse-chronological order, the "Previous" page is actually the newer page and vice-verca
+    'prevActive' => '<a class="btn btn-primary float-left" href="{{url}}">&larr; Newer</a>',
+    'nextActive' => '<a class="btn btn-primary float-right" href="{{url}}">Older &rarr;</a>',
 ];

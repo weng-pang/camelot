@@ -1,5 +1,11 @@
 # Licenses
 
+## Public template
+
+[Clean Blog](https://startbootstrap.com/template-overviews/clean-blog/) template licensed under the MIT license.
+
+Home screen image of Milky Way by [Alan Labisch](https://unsplash.com/photos/6eaUN_0dHQU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on Unsplash
+
 ## Admin template
 
 [Module Admin](https://modularcode.io/modular-admin-html) template licensed under the MIT license.
