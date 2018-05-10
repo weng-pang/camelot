@@ -11,8 +11,16 @@
                 <h3 class="title">Site Settings</h3>
             </div>
 
+            <?php if ($settings->is_demo_site): ?>
+                <div class="message warning">
+                    <strong>This site is in demo mode.</strong>
+                    That means that anyone can log in as an administrator.
+                    To change this, run <code>bin/cake toggle_demo_mode</code> from the command line.
+                </div>
+            <?php endif ?>
+
             <?php
-            echo $this->Form->create($settings, ['id' => 'settinsg-form']);
+            echo $this->Form->create($settings, ['id' => 'settings-form']);
             echo $this->Form->control('title');
             echo $this->Form->control('subtitle');
             echo $this->Form->button(__('Save Settings'));

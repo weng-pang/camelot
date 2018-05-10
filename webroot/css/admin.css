@@ -9,6 +9,11 @@
     background-color: #ffdddd;
 }
 
+.warning {
+    color: #b15e00;
+    background-color: #ffebdf;
+}
+
 .success {
     color: #067600;
     background-color: #e3ffdf;

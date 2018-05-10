@@ -51,10 +51,11 @@ CREATE TABLE settings (
   id INT AUTO_INCREMENT NOT NULL,
   title VARCHAR(255) NOT NULL,
   subtitle VARCHAR(255),
+  is_demo_site INT NOT NULL default 0,
   PRIMARY KEY (id)
 );
 
-INSERT INTO settings (title, subtitle) VALUES ('IE CMS', 'It\'s a CMS, for IE!');
+INSERT INTO settings (title, subtitle) VALUES ('IE CMS', 'It''s a CMS, for IE!');
 
 INSERT INTO users (email, password, created, modified)
 VALUES
