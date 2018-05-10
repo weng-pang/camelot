@@ -1,6 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
+ * @var array $currentUser
  * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
  */
 ?>
@@ -31,7 +32,7 @@
                 <td><?= h($user->modified->timeAgoInWords()) ?></td>
                 <td class="action-col">
                     <?= $this->element('Admin/Buttons/edit', ['url' => ['action' => 'edit', $user->id]]) ?>
-                    <?= $this->element('Admin/Buttons/delete', ['url' => ['action' => 'delete', $user->id]]) ?>
+                    <?= $this->element('Admin/Buttons/delete', ['url' => ['action' => 'delete', $user->id], 'disabled' => $currentUser['id'] === $user->id]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

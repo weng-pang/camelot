@@ -28,6 +28,12 @@
     font-size: 0.8em;
 }
 
+.btn[disabled=disabled] {
+    background-color: #ebebeb !important;
+    color: #8d8d8d !important;
+    border-color: #c2c2c2 !important;
+}
+
 /* All except the first title need space above them to separate parts of the dashboard from eachother. */
 .dashboard-page .title-block:not(:first-child) {
     margin-top: 32px;

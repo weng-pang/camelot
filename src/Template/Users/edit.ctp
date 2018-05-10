@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
+ * @var array $currentUser
  */
 ?>
 
@@ -29,7 +30,11 @@
                 <?= $this->Form->postLink(
                     __('Delete'),
                     ['action' => 'delete', $user->id],
-                    ['confirm' => __('Are you sure?'), 'class' => 'btn btn-delete btn-danger']
+                    [
+                        'confirm' => ($currentUser['id'] === $user->id) ? false : __('Are you sure?'),
+                        'class' => 'btn btn-delete btn-danger',
+                        'disabled' => ($currentUser['id'] === $user->id)
+                    ]
                 )
                 ?>
             </div>

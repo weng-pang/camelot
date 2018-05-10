@@ -36,9 +36,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="about.html">About</a>
-                </li>
                 <?php if ($this->request->getSession()->read('Auth.User')): ?>
                     <li class="nav-item">
                         <?= $this->Html->link('Admin', ['controller' => 'admin', 'action' => 'index'], ['class' => 'nav-link']) ?>
@@ -52,6 +49,10 @@
                     </li>
                     <li class="nav-item">
                         <?= $this->Html->link('Logout', ['controller' => 'users', 'action' => 'logout'], ['class' => 'nav-link']) ?>
+                    </li>
+                <?php else: ?>
+                    <li class="nav-item">
+                        <?= $this->Html->link('Login', ['controller' => 'users', 'action' => 'login'], ['class' => 'nav-link']) ?>
                     </li>
                 <?php endif ?>
             </ul>

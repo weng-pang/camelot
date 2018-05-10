@@ -56,6 +56,7 @@ class AppController extends Controller
                     ]
                 ]
             ],
+            'logoutRedirect' => ['controller' => 'home'],
             'loginAction' => [
                 'controller' => 'Users',
                 'action' => 'login'
@@ -74,9 +75,10 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event)
     {
-        // We really want the site settings to be available in any template.
+        // We really want the site settings and the current user (if any) to be available in all templates.
         // This achieves that (see https://stackoverflow.com/a/1384697).
         $this->set('settings', TableRegistry::get('Settings')->find()->firstOrFail());
+        $this->set('currentUser', $this->Auth->user());
 
         return parent::beforeFilter($event);
     }
