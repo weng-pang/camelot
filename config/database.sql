@@ -55,15 +55,16 @@ CREATE TABLE settings (
   PRIMARY KEY (id)
 );
 
-INSERT INTO settings (title, subtitle) VALUES ('IE CMS', 'It''s a CMS, for IE!');
+INSERT INTO settings (title, subtitle) VALUES ('Camelot', 'A CMS written in CakePHP for the IE project.');
 
+-- The password for this user is "root@example.com" (before being hashed).
 INSERT INTO users (email, password, created, modified)
 VALUES
 ('root@example.com', '$2y$10$g/gbftSdcZpuFYbwqYD5de4AWFuwG1pXykGo1Qc..hVZcEN/96ryG', NOW(), NOW());
 
 INSERT INTO articles (user_id, title, slug, body, published, created, modified)
 VALUES
-(1, 'First Post', 'first-post', 'This is the first post.', 1, now(), now()),
+(1, 'Welcome to Camelot', 'welcome', 'Camelot is a custom CMS written using CakePHP. The idea is to show how various different functionality can be implemented in a modern PHP website using the CakePHP framework. Initially, it is a basic blog site, but over time it will grow as more features are added. The source code can be viewed at https://git.infotech.monash.edu/UGIE/cms.', 1, now(), now()),
 (1, 'Second Post', 'second-post', 'This is the second post.', 1, now(), now()),
 (1, 'Third Post', 'third-post', 'This is the third post.', 1, now(), now()),
 (1, 'Fourth Post', 'fourth-post', 'This is the fourth post.', 1, now(), now()),
