@@ -37,4 +37,9 @@ class Article extends Entity
         }, '');
         return trim($str, ', ');
     }
+
+    protected function _setBody($unsafeBodyWithHtml) {
+        $purifier = new \HTMLPurifier(\HTMLPurifier_Config::createDefault());
+        return $purifier->purify($unsafeBodyWithHtml);
+    }
 }
