@@ -68,6 +68,7 @@ class TagsController extends AppController
             }
             $this->Flash->error(__('The tag could not be saved. Please, try again.'));
         }
+
         $this->set(compact('tag'));
         $this->render('edit');
     }
