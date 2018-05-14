@@ -8,4 +8,4 @@
 <?php $this->assign('heading', $article->title) ?>
 <?php $this->assign('meta', "Posted on {$article->created->toFormattedDateString()}") ?>
 
-<?= h($article->body) ?>
+<?= $article->body ?>
