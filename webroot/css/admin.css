@@ -55,3 +55,7 @@
 .sidebar-header .brand a:hover {
     text-decoration: underline;
 }
+
+.chosen-container {
+    display: block;
+}

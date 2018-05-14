@@ -8,6 +8,7 @@ $currentAction = $this->request->getParam('action');
 
 $isDashboardActive  = $currentController === 'Admin' && $currentAction === 'index';
 $isContentActive  = $currentController === 'Articles';
+$isTagsActive  = $currentController === 'Tags';
 $isUsersActive  = $currentController === 'Users';
 $isSettingsActive  = $currentController === 'Admin' && $currentAction === 'settings';
 ?>
@@ -31,6 +32,13 @@ $isSettingsActive  = $currentController === 'Admin' && $currentAction === 'setti
                 <li><?= $this->Html->link('View articles', ['controller' => 'articles']) ?></li>
                 <li><?= $this->Html->link('Add new article', ['controller' => 'articles', 'action' => 'add']) ?></li>
             </ul>
+        </li>
+        <li class="<?= $isTagsActive ? 'active' : '' ?>">
+            <?= $this->Html->link(
+                    '<i class="fa fa-tag"></i> Tags',
+                    ['controller' => 'tags'],
+                    ['escape' => false]
+            ) ?>
         </li>
         <li class="<?= $isUsersActive ? 'active open' : '' ?>">
             <?= $this->Html->link(
