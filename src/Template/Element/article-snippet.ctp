@@ -16,7 +16,7 @@
         <?php endif ?>
     </a>
     <p>
-        <?= h($this->Text->truncate($article['body'], 250, ['exact' => false])) ?>
+        <?= $this->Text->truncate($article['body'], 250, ['exact' => false]) ?>
     </p>
     <p class="post-meta">Posted on <?= h($article->created->toFormattedDateString()) ?></p>
 </div>
