@@ -86,9 +86,11 @@ $this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
 <?php echo $this->Html->script('lib/template/admin/app.js'); ?>
 <?php echo $this->Html->script('lib/jquery.validate.min.js'); ?>
 <?php echo $this->Html->script('lib/chosen.jquery.min.js'); ?>
+<?php echo $this->Html->script('lib/tinymce/tinymce.min.js'); ?>
 <?php echo $this->fetch('script'); ?>
 <script>
     (function() {
+        tinymce.init({ selector:'textarea' });
         $('select.chosen').chosen({width: '50%'});
     })();
 </script>
