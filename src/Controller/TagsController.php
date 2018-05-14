@@ -49,6 +49,7 @@ class TagsController extends AppController
         ]);
 
         $this->set('tag', $tag);
+        $this->viewBuilder()->setLayout('default');
     }
 
     /**
