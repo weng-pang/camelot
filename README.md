@@ -18,3 +18,4 @@ Home screen image of Milky Way by [Alan Labisch](https://unsplash.com/photos/6ea
 
 [Chosen](https://github.com/harvesthq/chosen) used under the MIT license.
 [TinyMCE Community Version](https://www.tinymce.com/) used under the LGPLv2 license.
+[HTMLPurifier](http://htmlpurifier.org/) used under the LGPLv2 license.

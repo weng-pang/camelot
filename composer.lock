@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c267b48ce7e8479d046c84d265a0788a",
+    "content-hash": "dbb60f856f0630427fd5532f8351159b",
     "packages": [
         {
             "name": "aura/intl",
@@ -288,6 +288,53 @@
             ],
             "description": "A composer installer for CakePHP 3.0+ plugins.",
             "time": "2017-12-24T21:09:29+00:00"
+        },
+        {
+            "name": "ezyang/htmlpurifier",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezyang/htmlpurifier.git",
+                "reference": "89b3fe431e422fd06ce71ced8cfbd5a56c22b344"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/89b3fe431e422fd06ce71ced8cfbd5a56c22b344",
+                "reference": "89b3fe431e422fd06ce71ced8cfbd5a56c22b344",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "require-dev": {
+                "simpletest/simpletest": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HTMLPurifier": "library/"
+                },
+                "files": [
+                    "library/HTMLPurifier.composer.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Edward Z. Yang",
+                    "email": "admin@htmlpurifier.org",
+                    "homepage": "http://ezyang.com"
+                }
+            ],
+            "description": "Standards compliant HTML filter written in PHP",
+            "homepage": "http://htmlpurifier.org/",
+            "keywords": [
+                "html"
+            ],
+            "time": "2018-03-05T00:16:11+00:00"
         },
         {
             "name": "josegonzalez/dotenv",
@@ -2604,6 +2651,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "ezyang/htmlpurifier": 20,
         "psy/psysh": 0
     },
     "prefer-stable": true,
