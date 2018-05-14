@@ -90,7 +90,25 @@ $this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
 <?php echo $this->fetch('script'); ?>
 <script>
     (function() {
-        tinymce.init({ selector:'textarea' });
+        tinymce.init({
+            selector: 'textarea',
+
+            // Started with the full list of all plugins from https://www.tinymce.com/docs/demo/full-featured/, and then
+            // removed ones which were unneeded for a relatively simplistic blog platform.
+            plugins: 'fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media table anchor toc lists wordcount imagetools contextmenu colorpicker textpattern help',
+            menubar: 'edit insert format table tools help',
+            toolbar1: 'formatselect | bold italic strikethrough | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+            menu: {
+                edit: {title: 'Edit', items: 'undo redo | cut copy paste | selectall'},
+                insert: {title: 'Insert', items: 'link media'},
+                format: {
+                    title: 'Format',
+                    items: 'bold italic underline strikethrough superscript subscript | formats | removeformat'
+                },
+                table: {title: 'Table', items: 'inserttable tableprops deletetable | cell row column'}
+            }
+        });
+
         $('select.chosen').chosen({width: '50%'});
     })();
 </script>
