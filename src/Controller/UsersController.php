@@ -137,7 +137,7 @@ class UsersController extends AppController
     public function login()
     {
         $this->viewBuilder()->setLayout('admin-login');
-        if ($this->request->is('post')) {
+        if ($this->getRequest()->is('post')) {
             $settings = TableRegistry::get('Settings')->find()->firstOrFail();
             if ($settings->is_demo_site && $this->getRequest()->getData('email') === 'root@example.com' && $this->getRequest()->getData('password') === 'demo password') {
                 $user = $this->Users->find()->firstOrFail();
