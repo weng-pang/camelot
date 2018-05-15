@@ -4,10 +4,12 @@
  * @var \App\Model\Entity\Article[] $articles
  */
 ?>
-<h1>Articles</h1>
 
-<div>
-    <?= $this->Html->link('Add Article', ['action' => 'add'], ['class' => 'btn btn-oval btn-primary']) ?>
+<div class="title-block">
+    <div class="title">
+        Articles
+        <?= $this->Html->link('Add Article', ['action' => 'add'], ['class' => 'pull-right btn btn-oval btn-primary']) ?>
+    </div>
 </div>
 
 <div class="card card-block">
@@ -24,12 +26,13 @@
             <?php foreach ($articles as $article): ?>
                 <tr>
                     <td style="width: 60%">
-                        <?= $this->Html->link($article->title, ['action' => 'view', $article->slug]) ?>
+                        <?= $this->Html->link($article->title, ['action' => 'edit', $article->slug]) ?>
                     </td>
                     <td>
                         <?= $article->created->timeAgoInWords() ?>
                     </td>
                     <td class="action-col">
+                        <?= $this->element('Admin/Buttons/view', ['url' => ['action' => 'view', $article->slug]]) ?>
                         <?= $this->element('Admin/Buttons/edit', ['url' => ['action' => 'edit', $article->slug]]) ?>
                         <?= $this->element('Admin/Buttons/delete', ['url' => ['action' => 'delete', $article->slug]]) ?>
                     </td>

@@ -5,18 +5,15 @@
  * @var array $currentUser
  */
 ?>
+<div class="title-block">
+    <div class="title">
+        <?= $user->id ? 'Edit' : 'New' ?> User
+    </div>
+</div>
 
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header">
-                <div class="header-block">
-                    <p class="title">
-                        <?= $user->id ? 'Edit' : 'Add' ?> User
-                    </p>
-                </div>
-            </div>
-
             <?= $this->Form->create($user, ['id' => 'user-form']) ?>
 
             <div class="card-block">

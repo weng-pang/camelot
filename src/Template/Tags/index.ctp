@@ -5,10 +5,11 @@
  * @var \App\Model\Entity\Tag[]|\Cake\Collection\CollectionInterface $tags
  */
 ?>
-<h1>Users</h1>
-
-<div>
-    <?= $this->Html->link('Add Tag', ['action' => 'add'], ['class' => 'btn btn-oval btn-primary']) ?>
+<div class="title-block">
+    <div class="title">
+        Tags
+        <?= $this->Html->link('Add Tag', ['action' => 'add'], ['class' => 'pull-right btn btn-oval btn-primary']) ?>
+    </div>
 </div>
 
 <div class="card card-block">

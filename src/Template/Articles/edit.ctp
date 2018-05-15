@@ -10,13 +10,16 @@
         margin-left: 10px;
     }
 </style>
+
+<div class="title-block">
+    <div class="title">
+        <h3 class="title"><?= $article->id ? 'Edit' : 'New' ?> Article</h3>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-9">
         <div class="card card-block">
-            <div class="title-block">
-                <h3 class="title"><?= $article->id ? 'Edit' : 'Add' ?> Article</h3>
-            </div>
-
             <?php
             echo $this->Form->create($article, ['id' => 'article-form']);
             echo $this->Form->control('title');

@@ -5,10 +5,11 @@
  * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
  */
 ?>
-<h1>Users</h1>
-
-<div>
-    <?= $this->Html->link('Add User', ['action' => 'add'], ['class' => 'btn btn-oval btn-primary']) ?>
+<div class="title-block">
+    <div class="title">
+        Users
+        <?= $this->Html->link('Add User', ['action' => 'add'], ['class' => 'pull-right btn btn-oval btn-primary']) ?>
+    </div>
 </div>
 
 <div class="card card-block">
@@ -26,7 +27,7 @@
         <tbody>
             <?php foreach ($users as $user): ?>
             <tr>
-                <td><?= $this->Html->link($user->email, ['action' => 'view', $user->id], []) ?></td>
+                <td><?= $this->Html->link($user->email, ['action' => 'edit', $user->id], []) ?></td>
                 <td><?= h($user->mobile_phone) ?></td>
                 <td><?= h($user->created->nice()) ?></td>
                 <td><?= h($user->modified->timeAgoInWords()) ?></td>

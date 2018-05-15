@@ -5,18 +5,15 @@
  * @var \App\Model\Entity\Article[] $articles
  */
 ?>
+<div class="title-block">
+    <div class="title">
+        <?= $tag->id ? 'Edit' : 'New' ?> Tag
+    </div>
+</div>
 
 <div class="row">
     <div class="col-md-4">
         <div class="card">
-            <div class="card-header">
-                <div class="header-block">
-                    <p class="title">
-                        <?= $tag->id ? 'Edit' : 'Add' ?> Tag
-                    </p>
-                </div>
-            </div>
-
             <?= $this->Form->create($tag, ['id' => 'tag-form']) ?>
 
             <div class="card-block">
