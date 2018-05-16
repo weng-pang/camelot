@@ -20,7 +20,6 @@ class Article extends Entity
     protected $_accessible = [
         '*' => true,
         'id' => false,
-        'slug' => false,
     ];
 
     protected function _getTagString()

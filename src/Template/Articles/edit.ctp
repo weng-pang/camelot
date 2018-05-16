@@ -13,7 +13,12 @@
 
 <div class="title-block">
     <div class="title">
-        <h3 class="title"><?= $article->id ? 'Edit' : 'New' ?> Article</h3>
+        <?= $article->isNew() ? 'New' : 'Edit' ?> Article
+        <?php if (!$article->isNew()): ?>
+            <span class="pull-right">
+                <?= $this->element('Admin/Buttons/view', ['url' => \Cake\Routing\Router::url(['action' => 'view', $article->slug]), 'target' => '_blank']) ?>
+            </span>
+        <?php endif ?>
     </div>
 </div>
 
@@ -23,6 +28,12 @@
             <?php
             echo $this->Form->create($article, ['id' => 'article-form']);
             echo $this->Form->control('title');
+            if (!$article->isNew()) {
+                // Don't prompt the user to enter a slug when first creating the article. We will create one
+                // automatically in the Controller or Model. However, once the article is created, it may be
+                // desirable for the user to change the slug.
+                echo $this->Form->control('slug');
+            }
             echo $this->Form->control('body', ['rows' => '10']);
             echo $this->Form->control('tags._ids', ['options' => $tags]);
             echo $this->Form->button(__('Save Article'));
