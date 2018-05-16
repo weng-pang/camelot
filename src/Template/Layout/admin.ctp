@@ -97,7 +97,7 @@ $this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
             // removed ones which were unneeded for a relatively simplistic blog platform.
             plugins: 'fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media table anchor toc lists wordcount imagetools contextmenu colorpicker textpattern help',
             menubar: 'edit insert format table tools help',
-            toolbar1: 'formatselect | bold italic strikethrough | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+            toolbar1: 'formatselect | bold italic strikethrough codetag | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | fullpage',
             menu: {
                 edit: {title: 'Edit', items: 'undo redo | cut copy paste | selectall'},
                 insert: {title: 'Insert', items: 'link media'},
@@ -106,7 +106,22 @@ $this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
                     items: 'bold italic underline strikethrough superscript subscript | formats | removeformat'
                 },
                 table: {title: 'Table', items: 'inserttable tableprops deletetable | cell row column'}
-            }
+            },
+
+            // This is quite messy, but the back story is that TinyMCE DOES provide the ability to format selected
+            // text using <code></code> tags, but it does NOT allow you to put a button in the toolbar for this.
+            // As such, I've hacked into the existing ability to toggle the 'code' style, based on the following
+            // stack voerflow answer: https://stackoverflow.com/a/23241638. The "codetag" button is then used in the
+            // "toolbar1" above.
+            setup: function(editor) {
+                editor.addButton('codetag', {
+                    text: '',
+                    icon: 'code',
+                    onclick: function() {
+                        editor.formatter.toggle('code');
+                    }
+                });
+            },
         });
 
         $('select').chosen({width: '50%'});
