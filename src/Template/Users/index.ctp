@@ -17,20 +17,18 @@
     <table class="table">
         <thead>
             <tr>
+                <th><?= $this->Paginator->sort('name') ?></th>
                 <th><?= $this->Paginator->sort('email') ?></th>
-                <th><?= $this->Paginator->sort('mobile_phone', 'Mobile') ?></th>
                 <th><?= $this->Paginator->sort('created') ?></th>
-                <th><?= $this->Paginator->sort('modified') ?></th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($users as $user): ?>
             <tr>
-                <td><?= $this->Html->link($user->email, ['action' => 'edit', $user->id], []) ?></td>
-                <td><?= h($user->mobile_phone) ?></td>
+                <td><?= $this->Html->link($user->name, ['action' => 'edit', $user->id], []) ?></td>
+                <td><?= $this->Html->link($user->email, ['mailto' => $user->email]) ?></td>
                 <td><?= h($user->created->nice()) ?></td>
-                <td><?= h($user->modified->timeAgoInWords()) ?></td>
                 <td class="action-col">
                     <?= $this->element('Admin/Buttons/edit', ['url' => ['action' => 'edit', $user->id]]) ?>
                     <?= $this->element('Admin/Buttons/delete', ['url' => ['action' => 'delete', $user->id], 'disabled' => $currentUser['id'] === $user->id]) ?>

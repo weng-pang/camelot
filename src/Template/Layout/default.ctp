@@ -42,7 +42,7 @@
                     </li>
                     <li class="nav-item">
                         <?= $this->Html->link(
-                            $this->request->getSession()->read('Auth.User.email'),
+                            'My Profile',
                             ['controller' => 'users', 'action' => 'edit', $this->request->getSession()->read('Auth.User.id')],
                             ['class' => 'nav-link'])
                         ?>

@@ -5,8 +5,8 @@
  */
 
 $this->assign('heading-class', 'post-heading');
-$this->assign('heading', $user->email);
-$this->assign('meta', "Articles by {$user->email}");
+$this->assign('heading', $user->name);
+$this->assign('meta', "All articles by {$user->name}");
 
 foreach($user->articles as $article) {
     echo $this->element('article-snippet', ['article' => $article]);
