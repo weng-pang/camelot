@@ -32,8 +32,6 @@ class ResetDatabaseShell extends Shell
      */
     public function main()
     {
-        $script = (new File(CONFIG . "/database.sql"))->read();
-
         $connection = ConnectionManager::get('default');
         $db = $connection->config()['database'];
 
@@ -43,7 +41,11 @@ class ResetDatabaseShell extends Shell
         $this->out("Recreating new database");
         $connection->prepare("CREATE DATABASE {$db}")->execute();
         $connection->prepare("USE {$db}")->execute();
-        $connection->prepare($script)->execute();
+
+        foreach(['database', 'articles'] as $scriptName) {
+            $script = (new File(CONFIG . "/{$scriptName}.sql"))->read();
+            $connection->prepare($script)->execute();
+        }
 
         $this->out("Done!");
     }
