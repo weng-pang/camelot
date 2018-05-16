@@ -58,6 +58,7 @@ class UsersController extends AppController
         ]);
 
         $this->set('user', $user);
+        $this->viewBuilder()->setLayout('default');
     }
 
     /**
