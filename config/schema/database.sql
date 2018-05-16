@@ -2,6 +2,7 @@ CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
+    name varchar(255) NOT NULL,
     mobile_phone VARCHAR(30) NOT NULL DEFAULT '',
     created DATETIME,
     modified DATETIME
@@ -58,6 +59,6 @@ CREATE TABLE settings (
 INSERT INTO settings (title, subtitle) VALUES ('Camelot', 'A modern CMS written in CakePHP, do demonstrate various development practices.');
 
 -- The password for this user is "root@example.com" (before being hashed).
-INSERT INTO users (email, password, created, modified)
+INSERT INTO users (email, password, name, created, modified)
 VALUES
-('root@example.com', '$2y$10$g/gbftSdcZpuFYbwqYD5de4AWFuwG1pXykGo1Qc..hVZcEN/96ryG', NOW(), NOW());
+('root@example.com', '$2y$10$g/gbftSdcZpuFYbwqYD5de4AWFuwG1pXykGo1Qc..hVZcEN/96ryG', 'Arthur', NOW(), NOW());

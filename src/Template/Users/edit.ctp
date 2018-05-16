@@ -17,6 +17,7 @@
             <?= $this->Form->create($user, ['id' => 'user-form']) ?>
 
             <div class="card-block">
+                <?= $this->Form->control('name') ?>
                 <?= $this->Form->control('email') ?>
                 <?= $this->Form->control('password', ['value' => '', 'autocomplete' => 'off', 'required' => !$user->id]) ?>
                 <?= $this->Form->control('mobile_phone') ?>

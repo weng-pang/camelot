@@ -36,7 +36,7 @@ $this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
                 <ul class="nav-profile">
                     <li class="profile dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                            <span class="name"> <?= $this->request->getSession()->read('Auth.User.email'); ?></span>
+                            <span class="name"> <?= $this->request->getSession()->read('Auth.User.name'); ?></span>
                         </a>
                         <div class="dropdown-menu profile-dropdown-menu" aria-labelledby="dropdownMenu1">
                             <?= $this->Html->link(
