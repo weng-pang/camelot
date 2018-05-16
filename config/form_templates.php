@@ -22,7 +22,6 @@ return [
             'label' => '<label class="control-label" {{attrs}}><span>{{text}}</span></label>',
             'input' => '<input type="{{type}}" name="{{name}}" class="form-control underlined" {{attrs}}/>',
             'textarea' => '<textarea name="{{name}}" class="form-control underlined" {{attrs}}>{{value}}</textarea>',
-            'selectMultiple' => '<select name="{{name}}[]" class="chosen" multiple="multiple"{{attrs}}>{{content}}</select>',
 
             // The additional "<span>" here is because the "Modular Admin HTML template does some magic with regards to
             // styling checkboxes. It actually hides the real checkbox, and replaces it with a fancy box that it styles

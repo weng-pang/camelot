@@ -109,7 +109,7 @@ $this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
             }
         });
 
-        $('select.chosen').chosen({width: '50%'});
+        $('select').chosen({width: '50%'});
     })();
 </script>
 </body>
