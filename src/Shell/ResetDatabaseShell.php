@@ -43,7 +43,7 @@ class ResetDatabaseShell extends Shell
         $connection->prepare("USE {$db}")->execute();
 
         foreach(['database', 'articles'] as $scriptName) {
-            $script = (new File(CONFIG . "/{$scriptName}.sql"))->read();
+            $script = (new File(CONFIG . "/schema/{$scriptName}.sql"))->read();
             $connection->prepare($script)->execute();
         }
 
