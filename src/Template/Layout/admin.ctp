@@ -92,6 +92,7 @@ $this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
     (function() {
         tinymce.init({
             selector: 'textarea',
+            content_css: '../../../css/home.css',
 
             // Started with the full list of all plugins from https://www.tinymce.com/docs/demo/full-featured/, and then
             // removed ones which were unneeded for a relatively simplistic blog platform.

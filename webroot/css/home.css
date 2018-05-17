@@ -8,3 +8,17 @@ footer {
 footer .copyright {
     margin-top: 12px;
 }
+
+a {
+    color: blue;
+}
+
+article pre {
+    background-color: #f8f8f8;
+    padding: 12px 24px;
+}
+
+article code {
+    background-color: #ffecec;
+    padding: 4px;
+}
