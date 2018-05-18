@@ -34,24 +34,39 @@ class ArticlesController extends AppController
     {
         $this->loadComponent('Paginator');
 
-        $queryTerms = $this->getRequest()->getQuery('query');
+        $queryTermsString = $this->getRequest()->getQuery('query');
 
-        // Search both the 'title' and the 'body' field, but make sure to use "OR". By default, the
-        // where() function joins all of the criteria together with "AND". That is, if the title matches the search
-        // term, then we don't also need the body to match for it to be interesting, we are happy to return it as
-        // a matching result.
-        $articles = $this->Articles->find()
-            ->where([
-                'OR' => [
-                    'title LIKE' => "%{$queryTerms}%",
-                    'body LIKE' => "%{$queryTerms}%",
-                ]
-            ]);
+        // Split the query string based on one or more whitespace characters (\s+).
+        // This is done using a "Regular Expression" (regex). They are often difficult to make sense of when starting out
+        // building websites, but they do get easier to understand the more you work with them. Proof of this is that
+        // when I started my career, I would have had no idea what /\s+/ meant. But after a lot of practice, I'm able
+        // to write a regex that does pretty much what I need for simpler tasks like this (Split on all whitespace characters).
+        $queryTermsArray = preg_split('/\s+/', $queryTermsString);
+
+        // We want to search for each term independently. If the user provided multiple terms, such as "PHP HTML", then
+        // we should find all articles where:
+        //  (The title includes "PHP" OR the body includes "PHP")
+        //   AND
+        //  (The title includes "HTML" OR the body includes "HTML")
+        // Notice how for each term, we need to build a condition such as "title LIKE ... OR body LIKE ...".
+        // This is what happens in the loop below, we build a collection of these "OR" statements.
+        $conditions = [];
+        foreach($queryTermsArray as $term) {
+            $conditions[] = ['OR' => [
+                'title LIKE' => "%{$term}%",
+                'body LIKE' => "%{$term}%",
+            ]];
+        }
+
+        // Once we have a collection of or (title LIKE ... OR body LIKE ...) statements, then we need to combine each
+        // one using an AND (see comments above for example). By default, if we provide an array of conditions to
+        // the where() method, then it will join them all together using AND, which is exactly what we want.
+        $articles = $this->Articles->find()->where($conditions);
         $this->set('articles', $this->Paginator->paginate($articles));
 
         // Pass the query the user asked for to the view, so we can say somethign like "Results for 'Blah'..." to
         // confirm that we did indeed search what they asked us to.
-        $this->set('query', $queryTerms);
+        $this->set('query', $queryTermsString);
 
         $this->viewBuilder()->setLayout('default');
     }
