@@ -13,7 +13,7 @@ class ArticlesController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->Auth->allow(['tags', 'view']);
+        $this->Auth->allow(['tags', 'view', 'search']);
         $this->loadModel('ArticleViews');
         $this->viewBuilder()->setLayout('admin');
     }
@@ -23,6 +23,37 @@ class ArticlesController extends AppController
         $this->loadComponent('Paginator');
         $articles = $this->Paginator->paginate($this->Articles->find());
         $this->set(compact('articles'));
+    }
+
+    /**
+     * Perform a search of the database for all articles matching a set of search terms.
+     * Specifically, we expect the URL to include a "?query=..." parameter, which we will inspect
+     * to find the terms we want to search for.
+     */
+    public function search()
+    {
+        $this->loadComponent('Paginator');
+
+        $queryTerms = $this->getRequest()->getQuery('query');
+
+        // Search both the 'title' and the 'body' field, but make sure to use "OR". By default, the
+        // where() function joins all of the criteria together with "AND". That is, if the title matches the search
+        // term, then we don't also need the body to match for it to be interesting, we are happy to return it as
+        // a matching result.
+        $articles = $this->Articles->find()
+            ->where([
+                'OR' => [
+                    'title LIKE' => "%{$queryTerms}%",
+                    'body LIKE' => "%{$queryTerms}%",
+                ]
+            ]);
+        $this->set('articles', $this->Paginator->paginate($articles));
+
+        // Pass the query the user asked for to the view, so we can say somethign like "Results for 'Blah'..." to
+        // confirm that we did indeed search what they asked us to.
+        $this->set('query', $queryTerms);
+
+        $this->viewBuilder()->setLayout('default');
     }
 
     public function view($slug = null)
