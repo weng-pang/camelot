@@ -22,3 +22,16 @@ article code {
     background-color: #ffecec;
     padding: 4px;
 }
+
+/**
+ * It is really only on the main landing pages that we care about enticing the user with fancy background graphics.
+ * When it comes time to doing complex business workflows, we want to push the heading more to the top and forget
+ * about it, rather than making a hero out of the main background image.
+ */
+header.masthead .page-heading.compact-page-heading {
+    padding: 50px 0;
+}
+
+header.masthead .page-heading.compact-page-heading h1 {
+    font-size: 60px;
+}

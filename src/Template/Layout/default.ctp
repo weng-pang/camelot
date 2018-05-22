@@ -22,6 +22,7 @@
     <?= $this->Html->css('lib/template/public/clean-blog.min.css') ?>
     <?= $this->Html->css('home.css') ?>
 
+
 </head>
 
 <body>
@@ -36,6 +37,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
+                <li id="search-wrapper" class="nav-item" style="display: none">
+                    <?= $this->Form->create(null, ['url' => ['controller' => 'articles', 'action' => 'simpleSearch'], 'method' => 'GET']) ?>
+                    <input class="search form-control" type="text" name="query" />
+                    <?= $this->Form->end() ?>
+                </li>
+                <li class="nav-item">
+                    <a id="search-show" class="nav-link" href="#">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a id="search-hide" class="nav-link" href="#" style="display: none">
+                        <i class="fa fa-times"></i> Cancel
+                    </a>
+                </li>
                 <?php if ($this->request->getSession()->read('Auth.User')): ?>
                     <li class="nav-item">
                         <?= $this->Html->link('Admin', ['controller' => 'admin', 'action' => 'index'], ['class' => 'nav-link']) ?>
@@ -66,7 +82,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="<?= $this->fetch('heading-class', 'page-heading') ?>">
+                <div class="<?= $this->fetch('heading-class', 'page-heading compact-page-heading') ?>">
                     <h1><?= $this->fetch('heading') ?></h1>
                     <?php if ($this->fetch('subheading')): ?>
                         <h2 class="subheading"><?= $this->fetch('subheading') ?></h2>
@@ -108,6 +124,28 @@
 
 <!-- Custom scripts for this template -->
 <?= $this->Html->script('lib/template/public/clean-blog.min.js') ?>
+
+<?= $this->fetch('script') ?>
+
+<script>
+    (function() {
+        var searchShow = $('#search-show');
+        var searchHide = $('#search-hide');
+        var searchWrapper = $('#search-wrapper');
+        searchShow.click(function() {
+            searchWrapper.show();
+            searchHide.show();
+            searchShow.hide();
+            searchWrapper.find('input').focus();
+        });
+        searchHide.click(function() {
+            searchWrapper.hide();
+            searchHide.hide();
+            searchShow.show();
+            searchWrapper.find('input').blur();
+        })
+    })();
+</script>
 
 </body>
 
