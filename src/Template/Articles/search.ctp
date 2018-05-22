@@ -2,27 +2,28 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Article[] $articles
+ * @var string[] $tagList
  * @var string $query
+ * @var int $selectedTagId
  */
 
 $this->assign('heading', "Search Results");
 $this->assign('subheading', "Showing articles that match \"{$query}\"");
 ?>
 
-<?= $this->Form->create(null, ['method' => 'GET']) ?>
-    <!--
-    Chose not to use $this->Form->control(...) because the style required for this search box is too custom.
-    Also, because it is not a CRUD form, we don't need to benefit from the way in which the FormHelper automatically
-    validates data, shows error messages, etc.
-    -->
-    <div class="input-group mb-3">
-        <input type="text" name="query" class="form-control" placeholder="Enter search terms..." value="<?= h($query) ?>">
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="submit">Search Again</button>
+<div class="large-search-wrapper">
+    <?= $this->Form->create(null, ['url' => ['controller' => 'articles', 'action' => 'advancedSearch'], 'method' => 'GET']) ?>
+        <div class="row">
+            <div class="col-lg-9">
+                <?= $this->Form->control('query', ['label' => 'Search terms', 'class' => 'form-control', 'value' => $query]) ?>
+            </div>
+            <div class="col-lg-3">
+                <?= $this->Form->control('tag', ['class' => 'form-control', 'options' => $tagList, 'empty' => 'Select a tag...', 'value' => $selectedTagId]) ?>
+            </div>
         </div>
-    </div>
-
-<?= $this->Form->end() ?>
+        <?= $this->Form->button('Search', ['type' => 'submit']) ?>
+    <?= $this->Form->end() ?>
+</div>
 
 <?php
 foreach($articles as $article) {

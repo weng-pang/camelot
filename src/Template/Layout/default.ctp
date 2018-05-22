@@ -22,6 +22,7 @@
     <?= $this->Html->css('lib/template/public/clean-blog.min.css') ?>
     <?= $this->Html->css('home.css') ?>
 
+
 </head>
 
 <body>
@@ -37,7 +38,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li id="search-wrapper" class="nav-item" style="display: none">
-                    <?= $this->Form->create(null, ['url' => ['controller' => 'articles', 'action' => 'search'], 'method' => 'GET']) ?>
+                    <?= $this->Form->create(null, ['url' => ['controller' => 'articles', 'action' => 'simpleSearch'], 'method' => 'GET']) ?>
                     <input class="search form-control" type="text" name="query" />
                     <?= $this->Form->end() ?>
                 </li>
@@ -123,6 +124,8 @@
 
 <!-- Custom scripts for this template -->
 <?= $this->Html->script('lib/template/public/clean-blog.min.js') ?>
+
+<?= $this->fetch('script') ?>
 
 <script>
     (function() {
