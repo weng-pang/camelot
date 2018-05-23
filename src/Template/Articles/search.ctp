@@ -8,6 +8,7 @@
  */
 
 $this->assign('heading', "Search Results");
+$this->assign('heading-class', "page-heading compact-page-heading");
 $this->assign('subheading', "Showing articles that match \"{$query}\"");
 ?>
 
