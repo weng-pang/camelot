@@ -14,7 +14,7 @@ class ArticlesController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->Auth->allow(['tags', 'view', 'search']);
+        $this->Auth->allow(['tags', 'view', 'advancedSearch', 'simpleSearch']);
         $this->loadModel('ArticleViews');
         $this->viewBuilder()->setLayout('admin');
     }
