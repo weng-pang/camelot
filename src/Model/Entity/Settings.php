@@ -24,6 +24,12 @@ class Settings extends Entity
      */
     protected $_accessible = [
         'title' => true,
-        'subtitle' => true
+        'subtitle' => true,
+        'background_image' => true,
     ];
+
+    protected function _getBackgroundImageUrl()
+    {
+        return \Cake\Routing\Router::url("/files/Settings/background_image/{$this->background_image}");
+    }
 }

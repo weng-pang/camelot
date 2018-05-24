@@ -20,9 +20,13 @@
             <?php endif ?>
 
             <?php
-            echo $this->Form->create($settings, ['id' => 'settings-form']);
+            echo $this->Form->create($settings, ['id' => 'settings-form', 'type' => 'file']);
             echo $this->Form->control('title');
             echo $this->Form->control('subtitle');
+            if ($settings->background_image) {
+                echo $this->Html->link('View current image', $settings->background_image_url);
+            }
+            echo $this->Form->control('background_image', ['type' => 'file']);
             echo $this->Form->button(__('Save Settings'));
             echo $this->Form->end();
             ?>
