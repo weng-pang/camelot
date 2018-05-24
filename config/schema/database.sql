@@ -57,7 +57,11 @@ CREATE TABLE settings (
   PRIMARY KEY (id)
 );
 
-INSERT INTO settings (title, subtitle) VALUES ('Camelot', 'A modern CMS written in CakePHP, to demonstrate various development practices for students in the Monash IE project.');
+INSERT INTO settings (title, subtitle, background_image) VALUES (
+    'Camelot',
+    'A modern CMS written in CakePHP, to demonstrate various development practices for students in the Monash IE project.',
+    'rufus-betty.png'
+);
 
 -- The password for this user is "root@example.com" (before being hashed).
 INSERT INTO users (email, password, name, created, modified)
