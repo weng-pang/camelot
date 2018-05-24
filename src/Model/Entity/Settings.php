@@ -30,6 +30,11 @@ class Settings extends Entity
 
     protected function _getBackgroundImageUrl()
     {
-        return \Cake\Routing\Router::url("/files/Settings/background_image/{$this->background_image}");
+        $image_path = "/files/Settings/background_image/{$this->background_image}";
+        if (!file_exists(WWW_ROOT . $image_path)) {
+            $image_path = '/img/home-bg.jpg';
+        }
+
+        return \Cake\Routing\Router::url($image_path);
     }
 }
