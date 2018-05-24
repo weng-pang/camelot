@@ -77,7 +77,7 @@
 </nav>
 
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('<?= \Cake\Routing\Router::url('/img/home-bg.jpg', true) ?>')">
+<header class="masthead" style="background-image: url('<?= $settings->background_image_url ?>')">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">

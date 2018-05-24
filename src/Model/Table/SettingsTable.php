@@ -34,6 +34,10 @@ class SettingsTable extends Table
         $this->setTable('settings');
         $this->setDisplayField('title');
         $this->setPrimaryKey('id');
+
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+            'background_image'
+        ]);
     }
 
     /**

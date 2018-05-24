@@ -53,6 +53,7 @@ CREATE TABLE settings (
   title VARCHAR(255) NOT NULL,
   subtitle VARCHAR(255),
   is_demo_site INT NOT NULL default 0,
+  background_image varchar(255) NULL,
   PRIMARY KEY (id)
 );
 
