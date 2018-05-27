@@ -92,7 +92,7 @@ class ArticlesController extends AppController
      * There are several problems with this. Most notably, it is looking for articles where the body of the article
      * exactly matches the $query entered by the user. However we really only want articles where the body contains
      * the text entered by the user, and probably also contains other text too. This is done using the LIKE keyword, and
-     * placing wildcards (represented by the % symbol) on either side ("%$query%", but my preference is always to use
+     * placing wildcards (represented by the % symbol) on either side ("%$query%"), but my preference is always to use
      * curly brackets when putting a variable in a string, to make it clearer where the start and ent of the variable is,
      * hence "%{$query}%":
      *
@@ -107,6 +107,10 @@ class ArticlesController extends AppController
      *          'title LIKE' => "%{$query}%",
      *      ]
      *  ]);
+     * 
+     * The trick with this statement is to read it inside out, instead of from top to bottom. If I read it in English
+     * from top to bottom, I get: "Find where or body like ... title like ...". The "or" is out of place in this sentence.
+     * Instead, I read the bit inside the where() method inside out: "Find where body like ... or title like ...".
      *
      * Starting to work better now. The only problem here is that if $query contains multiple words, it will only include
      * articles which match that exact phrase. So a $query of "article wow" will NOT match an article containing: "wow,
@@ -131,6 +135,11 @@ class ArticlesController extends AppController
      *      ]
      *  ]);
      *
+     * Again, read this inside out, starting at the deepest part of the array and working outwards. So instead of:
+     * "Find where AND OR body like ... title like ... OR body like ... title like ...", read it as follows:
+     * "Find where body like OR ... title like ... AND body like ... OR title like ...". It takes a bit of practice to
+     * be able to read these arrays in this manner when building conditions for a where() function.
+     * 
      * Of course, we don't know how many query terms will actually be present. This depends on what the user types. There
      * could be one term, there could be 1000. As such, we need to loop over all of the query terms and build up an
      * array of conditions, which is done in this method, but will be left out of the rest of this documentation.
@@ -157,13 +166,17 @@ class ArticlesController extends AppController
      *         return $query->where(['Tags.id' => $selectedTagId]);
      *     });
      *
-     * One thing to note above is that the part of the query where we asked for 'Articles.body LIKE ...' is now 'Articles.title LIKE ...'.
+     * One thing to note above is that the part of the query where we asked for 'title LIKE ...' is now 'Articles.title LIKE ...'.
      * Now that we've joined onto the Tags query, we end up with two tables in our SQL query, Articles + Tags. Both of
-     * these have a field called 'title', so we need to specify which 'title' we are comparing to the query terms.
+     * these have a field called 'title', so we need to specify which 'title' we are comparing to the query terms. We
+     * probably don't HAVE to change 'body LIKE' to 'Articles.body LIKE', because there is no 'body' column in the
+     * Tags table. However, for consistency we may as well.
      *
      * Finally, note that in the function below, we only actually call ->matching('Tags', ...) on our $articlesQuery
      * if the user actually chose a tag (i.e. if ($selectedTagId > 0)). If they haven't chosen a tag to filter on,
-     * then why bother?
+     * then why bother? Worse yet, if the user didn't select a tag but we DID include the join, then we'd only return
+     * articles where 'Tags.id' => 0. There are NO articles which join onto a tag with id 0, because there are no tags
+     * with an id of zero.
      *
      * @see simpleSearch() for a search which may be easier to understand and start with, because it doesn't try to
      * do the absolute correct thing at every opportunity.
