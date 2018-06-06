@@ -54,7 +54,10 @@
                 </li>
                 <?php if ($this->request->getSession()->read('Auth.User')): ?>
                     <li class="nav-item">
-                        <?= $this->Html->link('Admin', ['controller' => 'admin', 'action' => 'index'], ['class' => 'nav-link']) ?>
+                        <a>Welcome <?= $this->request->getSession()->read('Auth.User.name'); ?>!</a>
+                    </li>
+                    <li class="nav-item">
+                        <?= $this->Html->link('Dashboard', ['controller' => 'admin', 'action' => 'index'], ['class' => 'nav-link']) ?>
                     </li>
                     <li class="nav-item">
                         <?= $this->Html->link(
