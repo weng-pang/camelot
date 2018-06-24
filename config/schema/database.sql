@@ -57,6 +57,14 @@ CREATE TABLE settings (
   PRIMARY KEY (id)
 );
 
+CREATE TABLE enquiries (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  subject varchar(65) NOT NULL,
+  body varchar(255) NOT NULL,
+  created datetime NOT NULL,
+  PRIMARY KEY (id)
+);
+
 INSERT INTO settings (title, subtitle, background_image) VALUES (
     'Camelot',
     'A modern CMS written in CakePHP, to demonstrate various development practices for students in the Monash IE project.',
