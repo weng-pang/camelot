@@ -7,6 +7,7 @@ $currentController = $this->request->getParam('controller');
 $currentAction = $this->request->getParam('action');
 
 $isDashboardActive  = $currentController === 'Admin' && $currentAction === 'index';
+$isEnquiriesActive  = $currentController === 'Enquiries';
 $isContentActive  = $currentController === 'Articles';
 $isTagsActive  = $currentController === 'Tags';
 $isUsersActive  = $currentController === 'Users';
@@ -20,6 +21,13 @@ $isSettingsActive  = $currentController === 'Admin' && $currentAction === 'setti
                     '<i class="fa fa-home"></i> Dashboard',
                     ['controller' => 'admin'],
                     ['escape' => false]
+            ) ?>
+        </li>
+        <li class="<?= $isEnquiriesActive ? 'active' : '' ?>">
+            <?= $this->Html->link(
+                '<i class="fa fa-envelope"></i> Enquiries',
+                ['controller' => 'enquiries'],
+                ['escape' => false]
             ) ?>
         </li>
         <li class="<?= $isContentActive ? 'active open' : '' ?>">

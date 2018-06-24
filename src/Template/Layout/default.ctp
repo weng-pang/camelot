@@ -52,6 +52,13 @@
                         <i class="fa fa-times"></i> Cancel
                     </a>
                 </li>
+                <li class="nav-item">
+                    <?= $this->Html->link(
+                        'Send Enquiry',
+                        ['controller' => 'enquiries', 'action' => 'add'],
+                        ['class' => 'nav-link'])
+                    ?>
+                </li>
                 <?php if ($this->request->getSession()->read('Auth.User')): ?>
                     <li class="nav-item">
                         <a>Welcome <?= $this->request->getSession()->read('Auth.User.name'); ?>!</a>
