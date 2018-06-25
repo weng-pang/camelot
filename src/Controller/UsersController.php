@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
 
 /**
@@ -88,12 +89,29 @@ class UsersController extends AppController
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('You have been successfully registered!'));
 
-                return $this->redirect(['action' => 'login']);
+            $allUsers = TableRegistry::get('users');
+
+            // Checking if the email already exists. If it does, the account has already been created and
+            // all that is left to do is assign role = 1 and update the other information
+            $emailExists = $allUsers->exists(['email' => $user->email]);
+
+            // Returns the first (and in this case, only) row associated with the email
+            // We assume the email is unique in the Users table
+            $oldaccount = $allUsers->find()->where(['email' => $user->email])->first();
+
+            // If the email/ account does exist, then we update the old account details, and avoid creating a new account
+            if ($emailExists == 1 && $oldaccount->role < 1) {
+
+                $user = $this->Users->patchEntity($oldaccount, ['role' => 1, 'password' => $this->request->getData(['password']), 'name' => $user->name, 'mobile_phone' => $user->mobile_phone, 'modified' => Time::now()]);
             }
-            $this->Flash->error(__('There seems to be an issue. Please, try again.'));
+                if ($this->Users->save($user)) {
+
+                    $this->Flash->success(__('You have successfully registered!'));
+
+                    return $this->redirect(['action' => 'login']);
+                }
+                $this->Flash->error(__('There seems to be an issue. Please, try again.'));
         }
         $this->set(compact('user'));
         $this->render('edit');
