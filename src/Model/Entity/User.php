@@ -36,7 +36,8 @@ class User extends Entity
         'mobile_phone' => true,
         'created' => true,
         'modified' => true,
-        'articles' => true
+        'articles' => true,
+        'role' => true
     ];
 
     /**

@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\I18n\Time;
+use Cake\ORM\TableRegistry;
 
 /**
  * Enquiries Controller
@@ -62,12 +64,32 @@ class EnquiriesController extends AppController
             if ($this->Enquiries->save($enquiry)) {
                 $this->Flash->success(__('Your enquiry has been successfully sent!'));
 
+                // Retrieving Users table for use
+                $usersTable = TableRegistry::get('users');
+
+                // Query to find out if a user with the email already exists
+                $emailExists = $usersTable->exists(['email' => $enquiry->temp_email]);
+
+                // If no user is found with the email submitted, create a dummy account for the user and assign the
+                // email to it.
+                if ($emailExists == 0){
+                        $newUser = $usersTable->newEntity();
+                        $newUser->email = $enquiry->temp_email;
+                        $newUser->password = 'password123';
+                        $newUser->name = 'Temporary User';
+                        $newUser->mobile_phone = null;
+                        $newUser->created = Time::now();
+                        $newUser->modified = Time::now();
+                        $newUser->role = 0;
+                        $usersTable->save($newUser);
+                }
+
                 return $this->redirect(['action' => 'add']);
             }
             $this->Flash->error(__('The enquiry could not be saved. Please, try again.'));
         }
-        $this->set(compact('enquiry'));
 
+        $this->set(compact('enquiry'));
         //Assigning layout for this specific action to default
         $this->layout = 'default';
     }

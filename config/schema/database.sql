@@ -3,7 +3,8 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     name varchar(255) NOT NULL,
-    mobile_phone VARCHAR(30) NOT NULL DEFAULT '',
+    mobile_phone VARCHAR(30) DEFAULT '',
+    role int(11) NOT NULL DEFAULT '0',
     created DATETIME,
     modified DATETIME
 );
@@ -62,6 +63,7 @@ CREATE TABLE enquiries (
   subject varchar(65) NOT NULL,
   body varchar(255) NOT NULL,
   created datetime NOT NULL,
+  temp_email varchar(255) DEFAULT NULL,
   PRIMARY KEY (id)
 );
 

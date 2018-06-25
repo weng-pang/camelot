@@ -26,6 +26,7 @@ class Enquiry extends Entity
     protected $_accessible = [
         'subject' => true,
         'body' => true,
-        'created' => true
+        'created' => true,
+        'temp_email' => true
     ];
 }
