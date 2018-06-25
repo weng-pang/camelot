@@ -11,7 +11,10 @@
 </div>
 <div class="card card-block">
     <table class="vertical-table">
-
+        <tr>
+            <th scope="row" width="10%"><?= __('From') ?></th>
+            <td><?= h($enquiry->temp_email) ?></td>
+        </tr>
         <tr>
             <th scope="row" width="10%"><?= __('Subject') ?></th>
             <td><?= h($enquiry->subject) ?></td>

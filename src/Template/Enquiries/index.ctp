@@ -13,6 +13,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th scope="col" width = 20%><?= $this->Paginator->sort('temp_email','Email') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('subject') ?></th>
                 <th scope="col" width = 20% ><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col" width = 20% class="actions"><?= __('Actions') ?></th>
@@ -21,6 +22,7 @@
         <tbody>
             <?php foreach ($enquiries as $enquiry): ?>
             <tr>
+                <td><?= h($enquiry->temp_email) ?></td>
                 <td><?= h($enquiry->subject) ?></td>
                 <td><?= h($enquiry->created->nice()) ?></td>
                 <td class="actions">
