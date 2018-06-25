@@ -91,7 +91,7 @@ class UsersController extends AppController
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('You have been successfully registered!'));
 
-                return $this->redirect(['controller' => 'Home', 'action' => 'index']);
+                return $this->redirect(['action' => 'login']);
             }
             $this->Flash->error(__('There seems to be an issue. Please, try again.'));
         }
