@@ -76,6 +76,10 @@ class UsersTable extends Table
             ->integer('mobile_phone')
             ->allowEmpty('mobile_phone');
 
+        $validator
+            ->integer('role')
+            ->notEmpty('role');
+
         return $validator;
     }
 
