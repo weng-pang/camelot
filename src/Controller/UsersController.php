@@ -16,7 +16,7 @@ class UsersController extends AppController
     public function initialize()
     {
         parent::initialize();
-        //$this->Auth->allow(['logout', 'add', 'view']);
+        $this->Auth->allow(['logout', 'register']);
         $this->viewBuilder()->setLayout('admin');
     }
 
@@ -82,6 +82,22 @@ class UsersController extends AppController
         $this->render('edit');
     }
 
+    public function register()
+    {
+        $this->viewBuilder()->setLayout('register');
+        $user = $this->Users->newEntity();
+        if ($this->request->is('post')) {
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('You have been successfully registered!'));
+
+                return $this->redirect(['controller' => 'Home', 'action' => 'index']);
+            }
+            $this->Flash->error(__('There seems to be an issue. Please, try again.'));
+        }
+        $this->set(compact('user'));
+        $this->render('edit');
+    }
     /**
      * Edit method
      *

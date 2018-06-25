@@ -78,7 +78,7 @@
                     </li>
                 <?php else: ?>
                     <li class="nav-item">
-                        <?= $this->Html->link('Login', ['controller' => 'users', 'action' => 'login', '?' => ['redirect' => '/admin']], ['class' => 'nav-link']) ?>
+                        <?= $this->Html->link('Login/ Register', ['controller' => 'users', 'action' => 'login', '?' => ['redirect' => '/admin']], ['class' => 'nav-link']) ?>
                     </li>
                 <?php endif ?>
             </ul>
