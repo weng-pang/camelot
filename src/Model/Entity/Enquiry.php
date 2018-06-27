@@ -27,6 +27,6 @@ class Enquiry extends Entity
         'subject' => true,
         'body' => true,
         'created' => true,
-        'temp_email' => true
+        'temp_email' => true,
     ];
 }

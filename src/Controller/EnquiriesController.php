@@ -61,7 +61,6 @@ class EnquiriesController extends AppController
         $enquiry = $this->Enquiries->newEntity();
         if ($this->getRequest()->is('post')) {
             $enquiry = $this->Enquiries->patchEntity($enquiry, $this->request->getData());
-            $enquiry->temp_email = $this->request->getData(['temp_email']);
             // If the user is logged in, we assign the user id foreign key to the enquiry.
             if ($this->Auth->user()){
                 // Associate enquiry with this user's ID
