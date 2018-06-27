@@ -16,13 +16,13 @@ use Cake\ORM\TableRegistry;
 class EnquiriesController extends AppController
 {
 
-    public function beforeFilter(Event $event)
+    public function initialize()
     {
-        //This specifically allows guests to access the contact form page, specifically the add action that enables this.
-        parent::beforeFilter($event);
-        $this->Auth->allow('add');
+        parent::initialize();
+        $this->Auth->allow(['add', 'logout', 'register']);
         $this->viewBuilder()->setLayout('admin');
     }
+
     /**
      * Index method
      *
