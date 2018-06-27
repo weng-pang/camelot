@@ -108,6 +108,10 @@ class UsersController extends AppController
             }
                 if ($this->Users->save($user)) {
 
+                    // If a user registers, role is set to 1
+                    $user->role = 1;
+                    $this->Users->save($user);
+
                     $this->Flash->success(__('You have successfully registered!'));
 
                     return $this->redirect(['action' => 'login']);
