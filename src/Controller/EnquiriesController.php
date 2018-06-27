@@ -80,6 +80,7 @@ class EnquiriesController extends AppController
                 // If no user is found with the email submitted, create a dummy account for the user and assign the
                 // email to it.
                 if ($emailExists == 0){
+                    $enquiry = $this->Enquiries->patchEntity($enquiry, $this->request->getData());
                         $newUser = $usersTable->newEntity();
                         $newUser->email = $enquiry->temp_email;
                         $newUser->password = 'password123';
