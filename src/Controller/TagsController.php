@@ -20,7 +20,7 @@ class TagsController extends AppController
 
     public function isAuthorized($user)
     {
-        return $user['id'] > 0;
+        return $this->Auth->user('role') > 2;
     }
 
     /**

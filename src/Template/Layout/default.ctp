@@ -63,9 +63,15 @@
                     <li class="nav-item">
                         <a>Welcome <?= $this->request->getSession()->read('Auth.User.name'); ?>!</a>
                     </li>
+                    <?php if ($this->request->getSession()->read('Auth.User.role') > 2 ) { ?>
                     <li class="nav-item">
                         <?= $this->Html->link('Dashboard', ['controller' => 'admin', 'action' => 'index'], ['class' => 'nav-link']) ?>
                     </li>
+                    <?php } else { ?>
+                    <li class="nav-item">
+                        <?= $this->Html->link('Dashboard', ['controller' => 'customer', 'action' => 'index'], ['class' => 'nav-link']) ?>
+                </li>
+                    <?php }?>
                     <li class="nav-item">
                         <?= $this->Html->link(
                             'My Profile',

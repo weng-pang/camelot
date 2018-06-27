@@ -16,7 +16,7 @@ class CustomerController extends AppController
     public function isAuthorized($user)
     {
         // If you are a user, you can access this dashboard.
-        return $user['id'] > 0;
+        return $this->Auth->user('role') > 0;
     }
 
     public function index()

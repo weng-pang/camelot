@@ -75,6 +75,6 @@ INSERT INTO settings (title, subtitle, background_image) VALUES (
 );
 
 -- The password for this user is "root@example.com" (before being hashed).
-INSERT INTO users (email, password, name, created, modified)
+INSERT INTO users (email, password, name, created, modified, role)
 VALUES
-('root@example.com', '$2y$10$g/gbftSdcZpuFYbwqYD5de4AWFuwG1pXykGo1Qc..hVZcEN/96ryG', 'Arthur', NOW(), NOW());
+('root@example.com', '$2y$10$g/gbftSdcZpuFYbwqYD5de4AWFuwG1pXykGo1Qc..hVZcEN/96ryG', 'Arthur', NOW(), NOW(), 3);

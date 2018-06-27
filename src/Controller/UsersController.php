@@ -22,7 +22,7 @@ class UsersController extends AppController
     }
 
     public function isAuthorized($user) {
-        return $user['id'] > 0;
+        return $this->Auth->user('role') > 2;
     }
 
     public function logout()
@@ -185,11 +185,19 @@ class UsersController extends AppController
                 $user = $this->Auth->identify();
             }
 
-            if ($user) {
+            if ($user['role'] > 2) {
+                // $this->Auth->setUser($user);
+                // return $this->redirect($this->Auth->redirectUrl());
                 $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
+                return $this->redirect(['controller' => 'admin','action' => 'index']);
+
+            } elseif ($user['role'] < 3){
+
+                $this->Auth->setUser($user);
+                return $this->redirect(['controller' => 'customer', 'action' => 'index']);
+            } else {
+                $this->Flash->error('Your username or password is incorrect.');
             }
-            $this->Flash->error('Your username or password is incorrect.');
         }
     }
 }

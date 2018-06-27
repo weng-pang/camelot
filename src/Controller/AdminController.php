@@ -15,7 +15,8 @@ class AdminController extends AppController
     public function isAuthorized($user)
     {
         // If you are a user, you can access this dashboard.
-        return $user['id'] > 0;
+        //return $user['id'] > 0;
+        return $this->Auth->user('role') > 2;
     }
 
     public function index()
