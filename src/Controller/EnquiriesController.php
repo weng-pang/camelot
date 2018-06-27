@@ -100,7 +100,7 @@ class EnquiriesController extends AppController
             $this->Flash->error(__('The enquiry could not be saved. Please, try again.'));
         }
 
-        $this->set(compact('enquiry'));
+        $this->set('enquiry', $enquiry);
         //Assigning layout for this specific action to default
         $this->layout = 'default';
     }
