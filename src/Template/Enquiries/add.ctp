@@ -10,7 +10,7 @@
     <fieldset>
         <legend style = "text-align: center"><?= __('Send Enquiry') ?></legend>
         <?php
-            echo $this->Form->control('temp_email', array('required' => true, 'label' => 'Email'));
+            echo $this->Form->control('temp_email', array('required' => true));
             echo $this->Form->control('subject', array('required' => true));
             echo $this->Form->control('body', array('required' => true, 'rows' => 8));
         ?>

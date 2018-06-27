@@ -102,7 +102,7 @@ class EnquiriesController extends AppController
 
         $this->set('enquiry', $enquiry);
         //Assigning layout for this specific action to default
-        $this->layout = 'default';
+        $this->viewBuilder()->setLayout('default');
     }
 
     /**
