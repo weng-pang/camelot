@@ -104,6 +104,7 @@ class UsersController extends AppController
             if ($emailExists == 1 && $oldaccount->role < 1) {
 
                 $user = $this->Users->patchEntity($oldaccount, ['role' => 1, 'password' => $this->request->getData(['password']), 'name' => $user->name, 'mobile_phone' => $user->mobile_phone, 'modified' => Time::now()]);
+
             }
                 if ($this->Users->save($user)) {
 

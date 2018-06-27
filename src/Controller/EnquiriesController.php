@@ -141,6 +141,12 @@ class EnquiriesController extends AppController
     public function myEnquiries(){
         $enquiries = TableRegistry::get('Enquiries')->find();
         $this->paginate = ['contain' => ['Users']];
+
+        //if ($enquiry->user_id == $this->Auth->user('id')) {
+
+        $enquiries->where([
+            'Enquiries.user_id LIKE' => $this->Auth->user('id')]);
+
         $this->set('my_enquiries', $this->paginate($enquiries));
     }
 }
