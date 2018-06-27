@@ -61,6 +61,13 @@ class EnquiriesController extends AppController
         $enquiry = $this->Enquiries->newEntity();
         if ($this->request->is('post')) {
             $enquiry = $this->Enquiries->patchEntity($enquiry, $this->request->getData());
+
+            // If the user is logged in, we assign the user id foreign key to the enquiry.
+            if ($this->Auth->user()){
+                // Associate enquiry with this user's ID
+                $enquiry->user_id = $this->Auth->user('id');
+            }
+
             if ($this->Enquiries->save($enquiry)) {
                 $this->Flash->success(__('Your enquiry has been successfully sent!'));
 
@@ -82,6 +89,10 @@ class EnquiriesController extends AppController
                         $newUser->modified = Time::now();
                         $newUser->role = 0;
                         $usersTable->save($newUser);
+
+
+                        $enquiry->user_id = $newUser->id;
+                        $this->Enquiries->save($enquiry);
                 }
 
                 return $this->redirect(['action' => 'add']);
@@ -125,5 +136,11 @@ class EnquiriesController extends AppController
     public function isAuthorized($user)
     {
         return $user['id'] > 0;
+    }
+
+    public function myEnquiries(){
+        $enquiries = TableRegistry::get('Enquiries')->find();
+        $this->paginate = ['contain' => ['Users']];
+        $this->set('my_enquiries', $this->paginate($enquiries));
     }
 }
