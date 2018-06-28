@@ -21,6 +21,8 @@
                 <?= $this->Form->control('email') ?>
                 <?= $this->Form->control('password', ['value' => '', 'autocomplete' => 'off', 'required' => !$user->id]) ?>
                 <?= $this->Form->control('mobile_phone') ?>
+                <?= $this->Form->label('Role'); ?>
+                <?= $this->Form->radio('role', [0, 1, 2, 3]); ?>
             </div>
 
             <div class="card-footer">
