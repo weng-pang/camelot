@@ -27,7 +27,6 @@
                 <td><?= h($enquiry->created->nice()) ?></td>
                 <td class="actions">
                     <?= $this->element('Admin/Buttons/view', ['url' => ['action' => 'view', $enquiry->id]]) ?>
-                    <?= $this->element('Admin/Buttons/delete', ['url' => ['action' => 'delete', $enquiry->id]]) ?>
 
                 </td>
             </tr>

@@ -19,10 +19,15 @@ class EnquiriesController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->Auth->allow(['add', 'logout', 'register']);
+        $this->Auth->allow(['add', 'view', 'myEnquiries']);
         $this->viewBuilder()->setLayout('admin');
     }
 
+    public function isAuthorized($user)
+    {
+        // return $user['id'] > 0;
+        return $this->Auth->user('role') > 2;
+    }
     /**
      * Index method
      *
@@ -30,9 +35,12 @@ class EnquiriesController extends AppController
      */
     public function index()
     {
+
         $enquiries = $this->paginate($this->Enquiries);
 
         $this->set(compact('enquiries'));
+
+
     }
 
     /**
@@ -132,12 +140,12 @@ class EnquiriesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function isAuthorized($user)
-    {
-        return $user['id'] > 0;
-    }
-
     public function myEnquiries(){
+
+        if ($this->Auth->user(['role']) < 2) {
+            $this->viewBuilder()->setLayout('customer');
+        }
+
         $enquiries = TableRegistry::get('Enquiries')->find();
         $this->paginate = ['contain' => ['Users']];
 
