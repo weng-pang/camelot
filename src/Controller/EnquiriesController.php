@@ -52,6 +52,10 @@ class EnquiriesController extends AppController
      */
     public function view($id = null)
     {
+        if ($this->Auth->user(['role']) < 2) {
+            $this->viewBuilder()->setLayout('customer');
+        }
+
         $enquiry = $this->Enquiries->get($id, [
             'contain' => []
         ]);
