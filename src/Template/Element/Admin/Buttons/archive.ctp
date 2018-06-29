@@ -6,10 +6,10 @@
  */
 
 echo $this->Form->postLink(
-    '<i class="fa fa-trash"></i> Delete',
+    '<i class="fa fa-folder"></i> Archive',
     isset($disabled) && $disabled ? [] : $url,
     [
-        'class' => 'btn btn-oval btn-danger btn-delete',
+        'class' => 'btn btn-oval btn-warning btn-edit',
         'escape' => false,
         'confirm' => isset($disabled) && $disabled ? false : 'Are you sure?',
         'disabled' => isset($disabled) && $disabled

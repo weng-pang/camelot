@@ -16,7 +16,12 @@
         <?= $article->isNew() ? 'New' : 'Edit' ?> Article
         <?php if (!$article->isNew()): ?>
             <span class="pull-right">
-                <?= $this->element('Admin/Buttons/view', ['url' => \Cake\Routing\Router::url(['action' => 'view', $article->slug]), 'target' => '_blank']) ?>
+                <?php if ($article->published) { ?>
+                <?= $this->element('Admin/Buttons/archive', ['url' => ['action' => 'archive', $article->id]]) ?>
+                <?php } else {?>
+                <?= $this->element('Admin/Buttons/publish', ['url' => ['action' => 'publish', $article->id]]) ?>
+                <?php } ?>
+                <?= $this->element('Admin/Buttons/view', ['url' => ['action' => 'view', $article->slug]]) ?>
             </span>
         <?php endif ?>
     </div>

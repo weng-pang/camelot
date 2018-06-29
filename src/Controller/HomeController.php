@@ -19,7 +19,7 @@ class HomeController extends AppController
     {
         $this->loadComponent('Paginator');
         $articles = $this->Paginator->paginate(
-            $this->Articles->find(), [
+            $this->Articles->find()->where(['published' => true]), [
                 'limit' => 4,
                 'order' => [
                     'Articles.created' => 'DESC',

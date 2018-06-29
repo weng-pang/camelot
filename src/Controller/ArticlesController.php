@@ -276,6 +276,29 @@ class ArticlesController extends AppController
         $this->render('edit');
     }
 
+    public function archive($id=null){
+        $article = $this->Articles->get($id);
+
+        $article->published = false;
+
+        if ($this->Articles->save($article)) {
+            $this->Flash->success(__('Your article has been archived.'));
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('Unable to archive your article.'));
+    }
+
+    public function publish($id=null){
+        $article = $this->Articles->get($id);
+        $article->published = true;
+
+        if ($this->Articles->save($article)) {
+            $this->Flash->success(__('Your article has been published.'));
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('Unable to publish your article.'));
+    }
+
     public function edit($slug)
     {
         $article = $this->Articles
