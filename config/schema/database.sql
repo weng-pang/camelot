@@ -18,6 +18,7 @@ CREATE TABLE articles (
     published BOOLEAN DEFAULT FALSE,
     created DATETIME,
     modified DATETIME,
+    archived tinyint(1) DEFAULT '0',
     UNIQUE KEY (slug),
     FOREIGN KEY user_key (user_id) REFERENCES users(id)
 ) CHARSET=utf8mb4;
