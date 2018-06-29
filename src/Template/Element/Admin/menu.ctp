@@ -23,12 +23,16 @@ $isSettingsActive  = $currentController === 'Admin' && $currentAction === 'setti
                     ['escape' => false]
             ) ?>
         </li>
-        <li class="<?= $isEnquiriesActive ? 'active' : '' ?>">
+        <li class="<?= $isEnquiriesActive ? 'active open' : '' ?>">
             <?= $this->Html->link(
-                '<i class="fa fa-envelope"></i> Enquiries',
+                '<i class="fa fa-envelope"></i> Enquiries <i class="fa arrow"></i>',
                 ['controller' => 'enquiries'],
                 ['escape' => false]
             ) ?>
+            <ul class="sidebar-nav">
+                <li><?= $this->Html->link('View open enquiries', ['controller' => 'enquiries']) ?></li>
+                <li><?= $this->Html->link('View closed enquiries', ['controller' => 'enquiries', 'action' => 'closed_enquiries']) ?></li>
+            </ul>
         </li>
         <li class="<?= $isContentActive ? 'active open' : '' ?>">
             <?= $this->Html->link(

@@ -6,7 +6,7 @@
 ?>
 <div class="title-block">
     <div class="title">
-        Open Enquiries
+        Closed Enquiries
     </div>
 </div>
 <div class="card card-block">
@@ -20,14 +20,15 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($enquiries as $enquiry): ?>
+            <?php foreach ($archivedEnquiries as $enquiry): ?>
             <tr>
                 <td><?= h($enquiry->temp_email) ?></td>
                 <td><?= h($enquiry->subject) ?></td>
                 <td><?= h($enquiry->created->nice()) ?></td>
                 <td class="actions">
                     <?= $this->element('Admin/Buttons/view', ['url' => ['action' => 'view', $enquiry->id]]) ?>
-                    <?= $this->element('Admin/Buttons/close', ['url' => ['action' => 'close', $enquiry->id]]) ?>
+                    <?= $this->element('Admin/Buttons/open', ['url' => ['action' => 'open', $enquiry->id]]) ?>
+                    <?= $this->element('Admin/Buttons/delete', ['url' => ['action' => 'delete', $enquiry->id]]) ?>
 
                 </td>
             </tr>

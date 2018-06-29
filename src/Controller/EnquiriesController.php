@@ -36,10 +36,9 @@ class EnquiriesController extends AppController
     public function index()
     {
 
-        $enquiries = $this->paginate($this->Enquiries);
+        $enquiries = $this->paginate($this->Enquiries->find('all')->where(['Enquiries.closed'=> false])->contain([]));
 
         $this->set(compact('enquiries'));
-
 
     }
 
@@ -141,7 +140,7 @@ class EnquiriesController extends AppController
             $this->Flash->error(__('The enquiry could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'closed_enquiries']);
     }
 
     public function myEnquiries(){
@@ -159,5 +158,33 @@ class EnquiriesController extends AppController
             'Enquiries.user_id LIKE' => $this->Auth->user('id')]);
 
         $this->set('my_enquiries', $this->paginate($enquiries));
+    }
+
+    public function close($id=null){
+        $enquiry = $this->Enquiries->get($id);
+
+        $enquiry->closed = true;
+
+        if ($this->Enquiries->save($enquiry)) {
+            $this->Flash->success(__('This enquiry has been closed.'));
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('Unable to close this enquiry.'));
+    }
+
+    public function open($id=null){
+        $enquiry = $this->Enquiries->get($id);
+        $enquiry->closed = false;
+
+        if ($this->Enquiries->save($enquiry)) {
+            $this->Flash->success(__('The enquiry has been re-opened.'));
+            return $this->redirect(['action' => 'closed_enquiries']);
+        }
+        $this->Flash->error(__('Unable to re-open the enquiry.'));
+    }
+
+    public function closedEnquiries(){
+        $archivedEnquiries = TableRegistry::get('Enquiries')->find('all')->where(['Enquiries.closed'=> true])->contain([]);
+        $this->set('archivedEnquiries', $this->paginate($archivedEnquiries));
     }
 }
