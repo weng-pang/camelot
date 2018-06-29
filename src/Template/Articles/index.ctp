@@ -25,7 +25,7 @@
         <tbody>
             <?php foreach ($articles as $article): ?>
                 <tr <?php if($article->published==true){echo 'style="background:rgba(72, 255, 35, 0.25);"';} elseif($article->published==false){echo 'style="background:rgba(255, 178, 35, 0.25);"';} else{ echo "";} ?>>
-                    <td style="width: 60%">
+                    <td style="width: 40%">
                         <?= $this->Html->link($article->title, ['action' => 'edit', $article->slug]) ?>
                     </td>
                     <td>

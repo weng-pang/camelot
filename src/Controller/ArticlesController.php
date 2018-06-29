@@ -358,7 +358,7 @@ class ArticlesController extends AppController
         $article = $this->Articles->findBySlug($slug)->firstOrFail();
         if ($this->Articles->delete($article)) {
             $this->Flash->success(__('The {0} article has been deleted.', $article->title));
-            return $this->redirect(['action' => 'index']);
+            return $this->redirect(['action' => 'archiveIndex']);
         }
     }
 

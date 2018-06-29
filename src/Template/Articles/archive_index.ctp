@@ -24,7 +24,7 @@
         <tbody>
             <?php foreach ($archivedArticles as $article): ?>
                 <tr>
-                    <td style="width: 60%">
+                    <td style="width: 40%">
                         <?= $this->Html->link($article->title, ['action' => 'edit', $article->slug]) ?>
                     </td>
                     <td>
@@ -33,6 +33,7 @@
                     <td class="action-col">
                         <?= $this->element('Admin/Buttons/view', ['url' => ['action' => 'view', $article->slug]]) ?>
                         <?= $this->element('Admin/Buttons/restore', ['url' => ['action' => 'restore', $article->id]]) ?>
+                        <?= $this->element('Admin/Buttons/delete', ['url' => ['action' => 'delete', $article->slug]]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
