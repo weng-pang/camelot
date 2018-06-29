@@ -276,16 +276,16 @@ class ArticlesController extends AppController
         $this->render('edit');
     }
 
-    public function archive($id=null){
+    public function hide($id=null){
         $article = $this->Articles->get($id);
 
         $article->published = false;
 
         if ($this->Articles->save($article)) {
-            $this->Flash->success(__('Your article has been archived.'));
+            $this->Flash->success(__('Your article is now hidden.'));
             return $this->redirect(['action' => 'index']);
         }
-        $this->Flash->error(__('Unable to archive your article.'));
+        $this->Flash->error(__('Unable to hide your article.'));
     }
 
     public function publish($id=null){

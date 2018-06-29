@@ -17,7 +17,7 @@
         <?php if (!$article->isNew()): ?>
             <span class="pull-right">
                 <?php if ($article->published) { ?>
-                <?= $this->element('Admin/Buttons/archive', ['url' => ['action' => 'archive', $article->id]]) ?>
+                <?= $this->element('Admin/Buttons/hide', ['url' => ['action' => 'hide', $article->id]]) ?>
                     <?= $this->element('Admin/Buttons/view', ['url' => ['action' => 'view', $article->slug]]) ?>
                 <?php } else {?>
                 <?= $this->element('Admin/Buttons/publish', ['url' => ['action' => 'publish', $article->id]]) ?>
