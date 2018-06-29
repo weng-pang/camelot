@@ -9,7 +9,7 @@ echo $this->Form->postLink(
     '<i class="fa fa-bullhorn"></i> Publish',
     isset($disabled) && $disabled ? [] : $url,
     [
-        'class' => 'btn btn-oval btn-primary btn-edit',
+        'class' => 'btn btn-oval btn-info btn-edit',
         'escape' => false,
         'confirm' => isset($disabled) && $disabled ? false : 'Are you sure?',
         'disabled' => isset($disabled) && $disabled

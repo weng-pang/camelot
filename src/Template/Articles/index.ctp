@@ -32,12 +32,19 @@
                         <?= $article->created->timeAgoInWords() ?>
                     </td>
                     <td class="action-col">
+                        <?php if ($article->published) { ?>
                         <?= $this->element('Admin/Buttons/view', ['url' => ['action' => 'view', $article->slug]]) ?>
                         <?= $this->element('Admin/Buttons/edit', ['url' => ['action' => 'edit', $article->slug]]) ?>
-                        <?= $this->element('Admin/Buttons/delete', ['url' => ['action' => 'delete', $article->slug]]) ?>
+                        <?= $this->element('Admin/Buttons/archive', ['url' => ['action' => 'archive', $article->id]]) ?>
+                        <?php } else {?>
+                        <?= $this->element('Admin/Buttons/preview', ['url' => ['action' => 'view', $article->slug]]) ?>
+                        <?= $this->element('Admin/Buttons/edit', ['url' => ['action' => 'edit', $article->slug]]) ?>
+                        <?= $this->element('Admin/Buttons/publish', ['url' => ['action' => 'publish', $article->id]]) ?>
+                        <?php } ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 </div>
+

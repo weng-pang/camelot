@@ -18,10 +18,11 @@
             <span class="pull-right">
                 <?php if ($article->published) { ?>
                 <?= $this->element('Admin/Buttons/archive', ['url' => ['action' => 'archive', $article->id]]) ?>
+                    <?= $this->element('Admin/Buttons/view', ['url' => ['action' => 'view', $article->slug]]) ?>
                 <?php } else {?>
                 <?= $this->element('Admin/Buttons/publish', ['url' => ['action' => 'publish', $article->id]]) ?>
+                    <?= $this->element('Admin/Buttons/preview', ['url' => ['action' => 'view', $article->slug]]) ?>
                 <?php } ?>
-                <?= $this->element('Admin/Buttons/view', ['url' => ['action' => 'view', $article->slug]]) ?>
             </span>
         <?php endif ?>
     </div>
