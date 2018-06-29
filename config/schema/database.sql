@@ -65,6 +65,7 @@ CREATE TABLE enquiries (
   body varchar(255) NOT NULL,
   created datetime NOT NULL,
   temp_email varchar(255) DEFAULT NULL,
+  closed BOOLEAN DEFAULT FALSE,
   user_id int(11) DEFAULT NULL,
   PRIMARY KEY (id)
 );
