@@ -39,6 +39,7 @@ $isSettingsActive  = $currentController === 'Admin' && $currentAction === 'setti
             <ul class="sidebar-nav">
                 <li><?= $this->Html->link('View articles', ['controller' => 'articles']) ?></li>
                 <li><?= $this->Html->link('Add new article', ['controller' => 'articles', 'action' => 'add']) ?></li>
+                <li><?= $this->Html->link('View articles archive', ['controller' => 'articles', 'action' => 'archiveIndex']) ?></li>
             </ul>
         </li>
         <li class="<?= $isTagsActive ? 'active' : '' ?>">

@@ -4,6 +4,7 @@ use App\Model\Entity\ArticleView;
 use App\Model\Table\ArticlesTable;
 use App\Model\Table\ArticleViewsTable;
 use Cake\Database\Query;
+use Cake\ORM\TableRegistry;
 
 /**
  * @property ArticlesTable $Articles
@@ -22,9 +23,12 @@ class ArticlesController extends AppController
     public function index()
     {
         $this->loadComponent('Paginator');
-        $articles = $this->Paginator->paginate($this->Articles->find());
+
+        // Only displaying non-archived articles
+        $articles = $this->Paginator->paginate($this->Articles->find('all')->where(['Articles.archived'=> false])->contain([]));
         $this->set(compact('articles'));
     }
+
 
     /**
      * This checks for articles containing an exact phrase in either the title or the body.
@@ -288,6 +292,31 @@ class ArticlesController extends AppController
         $this->Flash->error(__('Unable to hide your article.'));
     }
 
+    public function archive($id=null){
+        $article = $this->Articles->get($id);
+
+        // If an article is archived, it is "unpublished" as well
+        $article->archived = true;
+        $article->published = false;
+
+        if ($this->Articles->save($article)) {
+            $this->Flash->success(__('Your article has been archived.'));
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('Unable to archive your article.'));
+    }
+
+    public function restore($id=null){
+        $article = $this->Articles->get($id);
+        $article->archived = false;
+
+        if ($this->Articles->save($article)) {
+            $this->Flash->success(__('Your article has been restored.'));
+            return $this->redirect(['action' => 'archiveIndex']);
+        }
+        $this->Flash->error(__('Unable to restore your article.'));
+    }
+
     public function publish($id=null){
         $article = $this->Articles->get($id);
         $article->published = true;
@@ -349,6 +378,11 @@ class ArticlesController extends AppController
             'articles' => $articles,
             'tags' => $tags
         ]);
+    }
+
+    public function archiveIndex(){
+            $archivedArticles = TableRegistry::get('Articles')->find('all')->where(['Articles.archived'=> true])->contain([]);
+            $this->set('archivedArticles', $this->paginate($archivedArticles));
     }
 
     public function isAuthorized($user)

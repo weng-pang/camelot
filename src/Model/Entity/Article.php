@@ -46,7 +46,7 @@ class Article extends Entity
      *
      * When we show this article to a user (e.g. when they view /articles/view/blah) in their browser, it will redirect
      * them to a scam, where they may have their identity or money stolen, or have a virus installed on their computer.
-     * This would not only be disasterous fo ryour user, but it reflects extremely poorly on your website.
+     * This would not only be disasterous for your user, but it reflects extremely poorly on your website.
      *
      * To avoid this, we generally would make sure to "escape" any user generated data before putting it into HTML to
      * be shown to users. This is done in CakePHP templates by using the h() function. This is why you see the following

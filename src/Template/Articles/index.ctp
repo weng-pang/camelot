@@ -36,10 +36,12 @@
                         <?= $this->element('Admin/Buttons/view', ['url' => ['action' => 'view', $article->slug]]) ?>
                         <?= $this->element('Admin/Buttons/edit', ['url' => ['action' => 'edit', $article->slug]]) ?>
                         <?= $this->element('Admin/Buttons/hide', ['url' => ['action' => 'hide', $article->id]]) ?>
+                            <?= $this->element('Admin/Buttons/archive', ['url' => ['action' => 'archive', $article->id]]) ?>
                         <?php } else {?>
                         <?= $this->element('Admin/Buttons/preview', ['url' => ['action' => 'view', $article->slug]]) ?>
                         <?= $this->element('Admin/Buttons/edit', ['url' => ['action' => 'edit', $article->slug]]) ?>
                         <?= $this->element('Admin/Buttons/publish', ['url' => ['action' => 'publish', $article->id]]) ?>
+                            <?= $this->element('Admin/Buttons/archive', ['url' => ['action' => 'archive', $article->id]]) ?>
                         <?php } ?>
                     </td>
                 </tr>
