@@ -33,7 +33,7 @@
                 <td><?= h($product->on_sale) ?></td>
                 <td class="actions">
                     <?= $this->element('Admin/Buttons/view', ['url' => ['action' => 'view', $product->id]]) ?>
-                    <?= $this->element('Admin/Buttons/edit', ['url' => ['action' => 'edit', $product->id]]) ?>
+                    <?= $this->element('Admin/Buttons/restore', ['url' => ['action' => 'restore', $product->id]]) ?>
                     <?= $this->element('Admin/Buttons/delete', ['url' => ['action' => 'delete', $product->id]]) ?>
                 </td>
             </tr>
