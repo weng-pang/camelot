@@ -17,6 +17,7 @@ $this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
     <?php echo $this->Html->css('lib/template/admin/app.css'); ?>
     <?php echo $this->Html->css('lib/chosen.min.css'); ?>
     <?php echo $this->Html->css('admin.css'); ?>
+    <?php echo $this->Html->meta('favicon.ico','img/favicon.ico',array('type' => 'icon')); ?>
 </head>
 <body>
 
