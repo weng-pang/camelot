@@ -8,6 +8,7 @@ $currentAction = $this->request->getParam('action');
 
 $isDashboardActive  = $currentController === 'Admin' && $currentAction === 'index';
 $isEnquiriesActive  = $currentController === 'Enquiries';
+$isProductsActive  = $currentController === 'Products';
 $isContentActive  = $currentController === 'Articles';
 $isTagsActive  = $currentController === 'Tags';
 $isUsersActive  = $currentController === 'Users';
@@ -32,6 +33,18 @@ $isSettingsActive  = $currentController === 'Admin' && $currentAction === 'setti
             <ul class="sidebar-nav">
                 <li><?= $this->Html->link('View open enquiries', ['controller' => 'enquiries']) ?></li>
                 <li><?= $this->Html->link('View closed enquiries', ['controller' => 'enquiries', 'action' => 'closed_enquiries']) ?></li>
+            </ul>
+        </li>
+        <li class="<?= $isProductsActive ? 'active open' : '' ?>">
+            <?= $this->Html->link(
+                '<i class="fa fa-cube"></i> Products <i class="fa arrow"></i>',
+                ['controller' => 'products'],
+                ['escape' => false]
+            ) ?>
+            <ul class="sidebar-nav">
+                <li><?= $this->Html->link('View products', ['controller' => 'products']) ?></li>
+                <li><?= $this->Html->link('Add new product', ['controller' => 'products', 'action' => 'add']) ?></li>
+                <li><?= $this->Html->link('View products archive', ['controller' => 'products', 'action' => 'archiveIndex']) ?></li>
             </ul>
         </li>
         <li class="<?= $isContentActive ? 'active open' : '' ?>">
