@@ -92,6 +92,6 @@ foreach($viewsOverTime as $views) {
                 }
             }
         }
-    });1
+    });
 </script>
 <?php $this->end() ?>
