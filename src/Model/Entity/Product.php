@@ -40,6 +40,7 @@ class Product extends Entity
         'created' => true,
         'modified' => true,
         'archived' => true,
-        'stock' => true
+        'stock' => true,
+        'featured' => true,
     ];
 }

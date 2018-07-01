@@ -32,7 +32,7 @@
             echo $this->Form->control('sale_price');
             echo $this->Form->control('stock');
             echo $this->Form->control('on_sale');
-            echo $this->Form->control('archived');
+            echo $this->Form->control('featured');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
