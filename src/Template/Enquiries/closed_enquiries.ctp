@@ -25,7 +25,7 @@
                 <td><?= h($enquiry->temp_email) ?></td>
                 <td><?= h($enquiry->subject) ?></td>
                 <td><?= h($enquiry->created->nice()) ?></td>
-                <td class="actions">
+                <td class="actions" width = "30%">
                     <?= $this->element('Admin/Buttons/view', ['url' => ['action' => 'view', $enquiry->id]]) ?>
                     <?= $this->element('Admin/Buttons/open', ['url' => ['action' => 'open', $enquiry->id]]) ?>
                     <?= $this->element('Admin/Buttons/delete', ['url' => ['action' => 'delete', $enquiry->id]]) ?>
