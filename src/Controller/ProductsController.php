@@ -23,7 +23,7 @@ class ProductsController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->Auth->allow(['view']);
+        $this->Auth->allow(['storeIndex']);
         $this->viewBuilder()->setLayout('admin');
     }
 
@@ -145,5 +145,19 @@ class ProductsController extends AppController
     public function archiveIndex(){
         $archivedProducts = TableRegistry::get('Products')->find('all')->where(['Products.archived'=> true])->contain([]);
         $this->set('archivedProducts', $this->paginate($archivedProducts));
+    }
+
+    public function storeIndex(){
+        $this->viewBuilder()->setLayout('store');
+        $this->loadComponent('Paginator');
+        $products = $this->Paginator->paginate(
+            $this->Products->find()->where(['archived' => false]), [
+                'limit' => 4,
+                'order' => [
+                    'Products.created' => 'DESC',
+                ]
+            ]
+        );
+        $this->set(compact('products'));
     }
 }
