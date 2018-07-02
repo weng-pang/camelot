@@ -7,6 +7,7 @@
 <div class="title-block">
     <div class="title">
         Products
+        <?= $this->Html->link('Add Product', ['action' => 'add'], ['class' => 'pull-right btn btn-oval btn-primary']) ?>
     </div>
 </div>
 <div class="card card-block">

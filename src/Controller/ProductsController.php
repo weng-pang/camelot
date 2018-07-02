@@ -62,6 +62,7 @@ class ProductsController extends AppController
      */
     public function add()
     {
+        $categories = TableRegistry::get('categories')->find('list', ['limit' => 200]);
         $product = $this->Products->newEntity();
         if ($this->request->is('post')) {
             $product = $this->Products->patchEntity($product, $this->request->getData());
@@ -72,7 +73,7 @@ class ProductsController extends AppController
             }
             $this->Flash->error(__('The product could not be saved. Please, try again.'));
         }
-        $this->set(compact('product'));
+        $this->set(compact('product', 'categories'));
     }
 
     /**
@@ -84,6 +85,7 @@ class ProductsController extends AppController
      */
     public function edit($id = null)
     {
+        $categories = TableRegistry::get('categories')->find('list', ['limit' => 200]);
         $product = $this->Products->get($id, [
             'contain' => []
         ]);
@@ -96,7 +98,7 @@ class ProductsController extends AppController
             }
             $this->Flash->error(__('The product could not be saved. Please, try again.'));
         }
-        $this->set(compact('product'));
+        $this->set(compact('product','categories'));
     }
 
     /**

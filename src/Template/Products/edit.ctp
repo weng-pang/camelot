@@ -33,6 +33,7 @@
             echo $this->Form->control('stock');
             echo $this->Form->control('on_sale');
             echo $this->Form->control('featured');
+            echo $this->Form->control('category_id', ['options' => $categories]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

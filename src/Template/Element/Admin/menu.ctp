@@ -43,8 +43,8 @@ $isSettingsActive  = $currentController === 'Admin' && $currentAction === 'setti
             ) ?>
             <ul class="sidebar-nav">
                 <li><?= $this->Html->link('View products', ['controller' => 'products']) ?></li>
-                <li><?= $this->Html->link('Add new product', ['controller' => 'products', 'action' => 'add']) ?></li>
                 <li><?= $this->Html->link('View products archive', ['controller' => 'products', 'action' => 'archiveIndex']) ?></li>
+                <li><?= $this->Html->link('Manage categories', ['controller' => 'categories']) ?></li>
             </ul>
         </li>
         <li class="<?= $isContentActive ? 'active open' : '' ?>">
@@ -55,7 +55,6 @@ $isSettingsActive  = $currentController === 'Admin' && $currentAction === 'setti
             ) ?>
             <ul class="sidebar-nav">
                 <li><?= $this->Html->link('View articles', ['controller' => 'articles']) ?></li>
-                <li><?= $this->Html->link('Add new article', ['controller' => 'articles', 'action' => 'add']) ?></li>
                 <li><?= $this->Html->link('View articles archive', ['controller' => 'articles', 'action' => 'archiveIndex']) ?></li>
             </ul>
         </li>
