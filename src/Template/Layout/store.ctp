@@ -58,12 +58,22 @@
                         <a>Welcome <?= $this->request->getSession()->read('Auth.User.name'); ?>!</a>
                     </li>
                 <?php }?>
-                <li class="nav-item">
-                    <?= $this->Html->link(
-                        'Store',
-                        ['controller' => 'products', 'action' => 'storeIndex'],
-                        ['class' => 'nav-link'])
-                    ?>
+                <li class="dropdown nav-item">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" >
+                        Store
+                    </a>
+                    <div class = "dropdown-menu">
+                        <?= $this->Html->link(
+                            'Store Home',
+                            ['controller' => 'products', 'action' => 'storeIndex'],
+                            ['class' => 'dropdown-item'])
+                        ?>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Category Pages</a>
+                        <a class="dropdown-item" href="#">Coming Soon</a>
+                        <div style="text-align: center"><img src="https://i.imgur.com/9SYjjER.png" >
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <?= $this->Html->link(

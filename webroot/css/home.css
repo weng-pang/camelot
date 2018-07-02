@@ -35,3 +35,7 @@ header.masthead .page-heading.compact-page-heading {
 header.masthead .page-heading.compact-page-heading h1 {
     font-size: 60px;
 }
+
+.dropdown:hover>.dropdown-menu{
+    display: block;
+}
