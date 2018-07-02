@@ -26,7 +26,7 @@
         <tbody>
             <?php foreach ($products as $product): ?>
             <tr>
-                <td width = 15%><?= $this->Html->image($product->image, array('width' => '100px')); ?></td>
+                <td width = 15%><?php if($product->image != '') { ?><?=  $this->Html->image($product->image, array('width' => '100px')); ?> <?php }; ?></td>
                 <td><?= h($product->name) ?></td>
                 <td><?= $this->Number->format($product->stock) ?></td>
                 <td><?= $this->Number->format($product->price) ?></td>

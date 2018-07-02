@@ -12265,6 +12265,7 @@ tbody.collapse.show {
 }
 
 .card {
+  padding: 20px;
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;

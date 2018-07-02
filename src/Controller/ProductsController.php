@@ -154,7 +154,7 @@ class ProductsController extends AppController
         $this->loadComponent('Paginator');
         $products = $this->Paginator->paginate(
             $this->Products->find()->where(['archived' => false]), [
-                'limit' => 4,
+                'limit' => 20,
                 'order' => [
                     'Products.created' => 'DESC',
                 ]

@@ -48,7 +48,7 @@
         </table>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
-            <?= $this->Html->image($product->image, array('width' => '200px')); ?>
+            <?php if($product->image != '') { ?><?= $this->Html->image($product->image, array('width' => '200px')); ?><?php } ?>
         </div>
     </div>
 </div>

@@ -20,7 +20,7 @@
                     <div class="header-block">
                         <p class="title" style="text-align: center">
 
-                            <?= $this->Html->image($product->image, array('height' => '180px')); ?>
+                            <?php if($product->image != '') { ?><?= $this->Html->image($product->image, array('height' => '180px')); ?><?php } ?>
                             <h5><?= h($product['name']) ?></h5>
                         </p>
                         <p class="title-description">

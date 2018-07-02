@@ -59,3 +59,14 @@
 .chosen-container {
     display: block;
 }
+
+.indicatorDefault {
+    background: rgba(4, 15, 95, 0.24);
+    border-radius: 10px;
+    width: 220px;
+    padding-left: 9px;
+    padding-top: 1px;
+    padding-bottom: 2px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
