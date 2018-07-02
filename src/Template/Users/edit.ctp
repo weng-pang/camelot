@@ -14,12 +14,14 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
+            <div class="indicatorDefault">
+                * Indicates required field
+            </div>
             <?= $this->Form->create($user, ['id' => 'user-form']) ?>
-
             <div class="card-block">
-                <?= $this->Form->control('name') ?>
-                <?= $this->Form->control('email') ?>
-                <?= $this->Form->control('password', ['value' => '', 'autocomplete' => 'off', 'required' => !$user->id]) ?>
+                <?= $this->Form->control('name', array('label' => 'Name *')) ?>
+                <?= $this->Form->control('email', array('label' => 'Email *')) ?>
+                <?= $this->Form->control('password', ['value' => '', 'autocomplete' => 'off', 'required' => !$user->id, 'label' => "Password *"]) ?>
                 <?= $this->Form->control('mobile_phone') ?>
                 <?= $this->Form->label('Role'); ?>
                 <?= $this->Form->radio('role', [0, 1, 2, 3]); ?>
