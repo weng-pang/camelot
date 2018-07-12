@@ -29,4 +29,14 @@ class Enquiry extends Entity
         'created' => true,
         'temp_email' => true,
     ];
+
+    /**
+     * If this user created this enquiry, then they are allowed to access it.
+     * Also, admin users can access all enquiries.
+     * @param $user
+     * @return bool True if the $user is allowed to access the enquiry.
+     */
+    public function canAccess($user) {
+        return Role::isAdmin($user['role']) || $this->user_id == $user['id'];
+    }
 }

@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 
+use App\Model\Entity\Role;
+
 class AdminController extends AppController
 {
     public function initialize()
@@ -15,8 +17,7 @@ class AdminController extends AppController
     public function isAuthorized($user)
     {
         // If you are a user, you can access this dashboard.
-        //return $user['id'] > 0;
-        return $this->Auth->user('role') > 2;
+        return Role::isAdmin($user['role']);
     }
 
     public function index()

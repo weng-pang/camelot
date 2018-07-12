@@ -14,7 +14,7 @@
 
 <div class="card card-block">
 
-    <table class="table">
+    <table class="articles-table table">
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('title') ?></th>
@@ -24,7 +24,7 @@
         </thead>
         <tbody>
             <?php foreach ($articles as $article): ?>
-                <tr <?php if($article->published==true){echo 'style="background:rgba(72, 255, 35, 0.25);"';} elseif($article->published==false){echo 'style="background:rgba(255, 178, 35, 0.25);"';} else{ echo "";} ?>>
+                <tr class="article-row <?= $article->published ? 'published' : 'unpublished' ?>">
                     <td style="width: 40%">
                         <?= $this->Html->link($article->title, ['action' => 'edit', $article->slug]) ?>
                     </td>
@@ -49,4 +49,3 @@
         </tbody>
     </table>
 </div>
-

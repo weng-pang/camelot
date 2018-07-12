@@ -78,3 +78,11 @@
 .dropdown:hover .dropdown-menu {
     display: block;
 }
+
+.article-row.published {
+    background-color: rgba(72, 255, 35, 0.25);
+}
+
+.article-row.unpublished {
+    background-color: rgba(255, 178, 35, 0.25);
+}

@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use Cake\ORM\TableRegistry;
+use App\Model\Entity\Role;
 
 class CustomerController extends AppController
 {
@@ -16,7 +16,7 @@ class CustomerController extends AppController
     public function isAuthorized($user)
     {
         // If you are a user, you can access this dashboard.
-        return $this->Auth->user('role') > 0;
+        return Role::isUser($user['role']);
     }
 
     public function index()

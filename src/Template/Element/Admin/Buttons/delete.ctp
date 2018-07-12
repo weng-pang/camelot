@@ -15,4 +15,3 @@ echo $this->Form->postLink(
         'disabled' => isset($disabled) && $disabled
     ]
 );
-

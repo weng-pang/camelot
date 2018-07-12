@@ -91,8 +91,8 @@ class ArticlesTable extends Table
             ->allowEmpty('body');
 
         $validator
-        ->boolean('published')
-        ->allowEmpty('published');
+            ->boolean('published')
+            ->allowEmpty('published');
 
         $validator
             ->boolean('archived')

@@ -37,7 +37,7 @@ class User extends Entity
         'created' => true,
         'modified' => true,
         'articles' => true,
-        'role' => true
+        'role' => true // I don't think we want this actually. We don't want to accidentally allow someone to add an "<input type='hidden' name='role' value='3' />" to the login form and have it assign that role to the user, as that is bad security practice.
     ];
 
     /**

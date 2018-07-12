@@ -4,7 +4,8 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     name varchar(255) NOT NULL,
     mobile_phone VARCHAR(30) DEFAULT '',
-    role int(11) NOT NULL DEFAULT '0',
+
+    role int(11) NOT NULL DEFAULT 0,
     created DATETIME,
     modified DATETIME
 );
@@ -61,8 +62,8 @@ CREATE TABLE settings (
 
 CREATE TABLE enquiries (
   id int(11) NOT NULL AUTO_INCREMENT,
-  subject varchar(65) NOT NULL,
-  body varchar(255) NOT NULL,
+  subject varchar(255) NOT NULL,
+  body text NOT NULL,
   created datetime NOT NULL,
   temp_email varchar(255) DEFAULT NULL,
   closed BOOLEAN DEFAULT FALSE,
@@ -87,9 +88,14 @@ CREATE TABLE IF NOT EXISTS `products` (
   PRIMARY KEY (`id`)
 );
 
+-- Can probably do away with "tags" now that categories are supported, so as not to confuse users with both tags and categories.
+-- You could mount an argument that a file may only have one category, but many tags, but that
+-- distinction is probably lost on most end users.
 CREATE TABLE IF NOT EXISTS `categories` (
   id int(11) NOT NULL AUTO_INCREMENT,
   name varchar(65) NOT NULL,
+
+  -- Perhaps image_url?
   image varchar(255) DEFAULT NULL,
   created datetime DEFAULT NULL,
   modified datetime DEFAULT NULL,
@@ -107,11 +113,16 @@ INSERT INTO users (email, password, name, created, modified, role)
 VALUES
 ('root@example.com', '$2y$10$g/gbftSdcZpuFYbwqYD5de4AWFuwG1pXykGo1Qc..hVZcEN/96ryG', 'Arthur', NOW(), NOW(), 3);
 
+-- I wonder if some of this could be moved to a different .sql file, so that database.sql is the bare minimum for a working system.
+-- I don't think I did a very good job of explaining that with the above two insert statements (settings + users).
+-- The site wont work without a settings row, nor will it work well without an admin user (how do you create the first admin user?).
+-- All of the rest of the example content to showcase the features of the website are important, but not necessary for a working website.
+
 INSERT INTO `products` (`id`, `name`, `description`, `image`, `price`, `sale_price`, `on_sale`, `created`, `modified`, `archived`, `stock`, `featured`, `category_id`) VALUES
-  (1, 'Aluminium Chestplate', '<!DOCTYPE html>\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p class=\"MsoNormal\"><span style=\"font-size: 12pt; line-height: 107%; font-family: Arial, sans-serif; color: #4f5f6f; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">A chestplate is a device worn over the torso to protect it from injury, as an item of religious significance, or as an item of status. A breastplate is sometimes worn by mythological beings as a distinctive item of clothing.</span></p>\r\n</body>\r\n</html>', 'https://i.imgur.com/tdhoGTS.png', '400.00', '300.00', 1, '2018-06-30 08:42:27', '2018-07-01 12:58:13', 0, 10, 0, 1),
-  (2, 'Steel Shortsword', '<!DOCTYPE html>\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p class=\"MsoNormal\"><span style=\"font-size: 12pt; line-height: 107%; font-family: Arial, sans-serif; color: #4f5f6f; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">Cold Steel&rsquo;s interpretation of this sword features a double-edged blade that is hand forged out of Carbon steel and hand polished and sharpened to perfection. The wooden handle is covered in leather and is supported by a simple, elegant guard at one end and a 5 lobed pommel at the other. The Viking Sword is supplied with a leather wrapped wooden scabbard that is reinforced with a polished steel chape and throat.</span></p>\r\n</body>\r\n</html>', 'https://i.imgur.com/w5Uu1xu.png', '250.00', '200.00', 0, '2018-06-30 08:57:08', '2018-06-30 12:53:55', 0, 10, 0,2),
-  (3, 'Steel Helmet', '<!DOCTYPE html>\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p><span style=\"font-size: 12pt; line-height: 107%; font-family: Arial, sans-serif; color: #4f5f6f; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">Polished 18 gauge mild steel with a butted ring chainmail aventail to protect the back of the neck.This&nbsp;helmet is full-size and fully wearable. It features a&nbsp;fully adjustable interior lining made from high quality 100 percent genuine leather to ensure a comfortable fit.</span><span style=\"text-align: -webkit-center;\"><span style=\"font-size: 12.0pt; line-height: 107%; font-family: \'Arial\',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; color: #4f5f6f; background: #F2ECE3; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;\">&nbsp;</span></span><span style=\"text-align: -webkit-center;\"><span style=\"font-size: 12pt; line-height: 107%; font-family: Arial, sans-serif; color: #4f5f6f; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">A grooved rim encircles the helmet and the design allows for easy breathing and visibility.</span></span></p>\r\n</body>\r\n</html>', 'https://i.imgur.com/Y9c5yYa.png', '250.00', '200.00', 0, '2018-06-30 12:37:20', '2018-07-01 13:20:15', 0, 10, 1,1),
-  (4, 'Steel Gauntlets', '<!DOCTYPE html>\r\n<html>\r\n<head>\r\n</head>\r\n<body>\r\n<p class=\"MsoNormal\"><span style=\"font-size: 12.0pt; mso-bidi-font-size: 11.0pt; line-height: 107%; font-family: \'Arial\',sans-serif; color: #4e5f6f;\">These wearable functional gauntlets are the perfect addition and some times a necessity for any Knights armour. Functional gauntlets are designed to protect the lower part of the arm, hands and fingers of the sword fighter. All our gauntlets here are fully functional. We have a variety of options that you can choose from to design your gauntlets. You can choose the size, color, steel and gauge thickness of your functional gauntlets.</span></p>\r\n</body>\r\n</html>', 'https://i.imgur.com/ponG91m.png', '200.00', '150.00', 0, '2018-07-01 05:23:35', '2018-07-01 12:15:21', 1, 10, 0,1);
+  (1, 'Aluminium Chestplate', '<p class=\"MsoNormal\"><span style=\"font-size: 12pt; line-height: 107%; font-family: Arial, sans-serif; color: #4f5f6f; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">A chestplate is a device worn over the torso to protect it from injury, as an item of religious significance, or as an item of status. A breastplate is sometimes worn by mythological beings as a distinctive item of clothing.</span></p>', 'https://i.imgur.com/tdhoGTS.png', '400.00', '300.00', 1, '2018-06-30 08:42:27', '2018-07-01 12:58:13', 0, 10, 0, 1),
+  (2, 'Steel Shortsword', '<p class=\"MsoNormal\"><span style=\"font-size: 12pt; line-height: 107%; font-family: Arial, sans-serif; color: #4f5f6f; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">Cold Steel&rsquo;s interpretation of this sword features a double-edged blade that is hand forged out of Carbon steel and hand polished and sharpened to perfection. The wooden handle is covered in leather and is supported by a simple, elegant guard at one end and a 5 lobed pommel at the other. The Viking Sword is supplied with a leather wrapped wooden scabbard that is reinforced with a polished steel chape and throat.</span></p>', 'https://i.imgur.com/w5Uu1xu.png', '250.00', '200.00', 0, '2018-06-30 08:57:08', '2018-06-30 12:53:55', 0, 10, 0,2),
+  (3, 'Steel Helmet', '<p><span style=\"font-size: 12pt; line-height: 107%; font-family: Arial, sans-serif; color: #4f5f6f; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">Polished 18 gauge mild steel with a butted ring chainmail aventail to protect the back of the neck.This&nbsp;helmet is full-size and fully wearable. It features a&nbsp;fully adjustable interior lining made from high quality 100 percent genuine leather to ensure a comfortable fit.</span><span style=\"text-align: -webkit-center;\"><span style=\"font-size: 12.0pt; line-height: 107%; font-family: \'Arial\',sans-serif; mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; color: #4f5f6f; background: #F2ECE3; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;\">&nbsp;</span></span><span style=\"text-align: -webkit-center;\"><span style=\"font-size: 12pt; line-height: 107%; font-family: Arial, sans-serif; color: #4f5f6f; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;\">A grooved rim encircles the helmet and the design allows for easy breathing and visibility.</span></span></p>', 'https://i.imgur.com/Y9c5yYa.png', '250.00', '200.00', 0, '2018-06-30 12:37:20', '2018-07-01 13:20:15', 0, 10, 1,1),
+  (4, 'Steel Gauntlets', '<p class=\"MsoNormal\"><span style=\"font-size: 12.0pt; mso-bidi-font-size: 11.0pt; line-height: 107%; font-family: \'Arial\',sans-serif; color: #4e5f6f;\">These wearable functional gauntlets are the perfect addition and some times a necessity for any Knights armour. Functional gauntlets are designed to protect the lower part of the arm, hands and fingers of the sword fighter. All our gauntlets here are fully functional. We have a variety of options that you can choose from to design your gauntlets. You can choose the size, color, steel and gauge thickness of your functional gauntlets.</span></p>', 'https://i.imgur.com/ponG91m.png', '200.00', '150.00', 0, '2018-07-01 05:23:35', '2018-07-01 12:15:21', 1, 10, 0,1);
 
 INSERT INTO `users` (`id`, `email`, `password`, `name`, `mobile_phone`, `role`, `created`, `modified`) VALUES
 (2, 'SirLancelot@hotmail.com', '$2y$10$vLVtQAlSCtvInqSXNhtPzO.SNxVqD4s1xgmjmJcmu6p9Cl8g71HrK', 'Temporary User', NULL, 0, '2018-07-01 05:02:58', '2018-07-01 05:02:58'),

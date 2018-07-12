@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Entity\Role;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
 
@@ -74,7 +75,7 @@ class UsersController extends AppController
             $user = $this->Users->patchEntity($user, $this->request->getData());
 
             if ($this->Users->save($user)) {
-                                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('The user has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
@@ -86,41 +87,26 @@ class UsersController extends AppController
 
     public function register()
     {
-        $this->viewBuilder()->setLayout('register');
+        $this->viewBuilder()->setLayout('auth');
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+            $user->role = Role::REGISTERED;
 
-            $allUsers = TableRegistry::get('users');
+            if ($this->Users->save($user)) {
 
-            // Checking if the email already exists. If it does, the account has already been created and
-            // all that is left to do is assign role = 1 and update the other information
-            $emailExists = $allUsers->exists(['email' => $user->email]);
+                // Force the user to be logged in, to prevent them having to re-enter their credentials just after
+                // entering them in the initial signup form.
+                $this->Auth->setUser($user);
 
-            // Returns the first (and in this case, only) row associated with the email
-            // We assume the email is unique in the Users table
-            $oldaccount = $allUsers->find()->where(['email' => $user->email])->first();
+                $this->Flash->success(__('You have successfully registered!'));
 
-            // If the email/ account does exist, then we update the old account details, and avoid creating a new account
-            if ($emailExists == 1 && $oldaccount->role < 1) {
-
-                $user = $this->Users->patchEntity($oldaccount, ['role' => 1, 'password' => $this->request->getData(['password']), 'name' => $user->name, 'mobile_phone' => $user->mobile_phone, 'modified' => Time::now()]);
-
+                return $this->redirect(['controller' => 'home', 'action' => 'index']);
             }
-                if ($this->Users->save($user)) {
-
-                    // If a user registers, role is set to 1
-                    $user->role = 1;
-                    $this->Users->save($user);
-
-                    $this->Flash->success(__('You have successfully registered!'));
-
-                    return $this->redirect(['action' => 'login']);
-                }
-                $this->Flash->error(__('There seems to be an issue. Please, try again.'));
+            $this->Flash->error(__('There seems to be an issue. Please, try again.'));
         }
         $this->set(compact('user'));
-        $this->render('edit');
+        $this->render('register');
     }
     /**
      * Edit method
@@ -178,7 +164,7 @@ class UsersController extends AppController
 
     public function login()
     {
-        $this->viewBuilder()->setLayout('admin-login');
+        $this->viewBuilder()->setLayout('auth');
         if ($this->getRequest()->is('post')) {
             $settings = TableRegistry::get('Settings')->find()->firstOrFail();
             if ($settings->is_demo_site && $this->getRequest()->getData('email') === 'root@example.com' && $this->getRequest()->getData('password') === 'demo password') {
@@ -187,16 +173,14 @@ class UsersController extends AppController
                 $user = $this->Auth->identify();
             }
 
-            if ($user['role'] > 2) {
-                // $this->Auth->setUser($user);
-                // return $this->redirect($this->Auth->redirectUrl());
-                $this->Auth->setUser($user);
-                return $this->redirect(['controller' => 'admin','action' => 'index']);
-
-            } elseif ($user['role'] < 3){
-
-                $this->Auth->setUser($user);
-                return $this->redirect(['controller' => 'customer', 'action' => 'index']);
+            if ($user) {
+                if (Role::isAdmin($user['role'])) {
+                    $this->Auth->setUser($user);
+                    return $this->redirect(['controller' => 'admin','action' => 'index']);
+                } else if ($user['role'] < 3){
+                    $this->Auth->setUser($user);
+                    return $this->redirect(['controller' => 'customer', 'action' => 'index']);
+                }
             } else {
                 $this->Flash->error('Your username or password is incorrect.');
             }

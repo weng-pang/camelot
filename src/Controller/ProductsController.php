@@ -62,7 +62,6 @@ class ProductsController extends AppController
      */
     public function add()
     {
-        $categories = TableRegistry::get('categories')->find('list', ['limit' => 200]);
         $product = $this->Products->newEntity();
         if ($this->request->is('post')) {
             $product = $this->Products->patchEntity($product, $this->request->getData());
@@ -85,7 +84,6 @@ class ProductsController extends AppController
      */
     public function edit($id = null)
     {
-        $categories = TableRegistry::get('categories')->find('list', ['limit' => 200]);
         $product = $this->Products->get($id, [
             'contain' => []
         ]);
@@ -124,8 +122,14 @@ class ProductsController extends AppController
     public function archive($id=null){
         $product = $this->Products->get($id);
 
+        // If the product doesn't exist, then this will cause a PHP null reference error.
+        // Given that we know this is a possibility (because $id is user input and they can type whatever they want there, doesn't have to be a valid ID)
+        // then we should instead send a 404 error to the user.
+        // I think the best way to do this in a CakepHP way is to use the "firstOrFail()" method instead of "get()", because that will throw the appropriate exception.
+        // Whether we appropriately display an error message in response is the next question I'd ask myself, because I don't think we do, but it is a good first step.
         $product->archived = true;
 
+        // As with enquiries. See comment there (for close() action).
         if ($this->Products->save($product)) {
             $this->Flash->success(__('This product has been archived.'));
             return $this->redirect(['action' => 'index']);

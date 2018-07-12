@@ -35,4 +35,3 @@
     <?php endforeach ?>
 </div>
 
-<!--<?php $this->end() ?> -->

@@ -30,18 +30,8 @@
 
                 <?= $this->Flash->render() ?>
 
-                <p class="text-center">Register an Account</p>
-                <?= $this->Form->create($user); ?>
-                <?= $this->Form->control('name', ['placeholder' => 'Your name', 'required']);?>
-                <?= $this->Form->control('email', ['placeholder' => 'Your email address', 'required']);?>
-                <?= $this->Form->control('mobile_phone', ['placeholder' => 'Your mobile number']);?>
-                <?= $this->Form->control('password', ['placeholder' => 'Your password', 'required']);?>
-                <div class="form-group">
-                    <?= $this->Html->link("Have an account already?", ['action' => 'login'], ['class' => 'forgot-btn pull-right']); ?>
-                    <!-- <?= $this->Html->link("Forgot password?", ['action' => 'resetPassword'], ['class' => 'forgot-btn pull-right']); ?> -->
-                </div>
-                <?= $this->Form->button('Register'); ?>
-                <?php echo $this->Form->end(); ?>
+                <?= $this->fetch('content') ?>
+
             </div>
         </div>
         <div class="text-center">

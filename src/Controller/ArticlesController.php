@@ -1,9 +1,11 @@
 <?php
 namespace App\Controller;
 use App\Model\Entity\ArticleView;
+use App\Model\Entity\Role;
 use App\Model\Table\ArticlesTable;
 use App\Model\Table\ArticleViewsTable;
 use Cake\Database\Query;
+use Cake\Http\Exception\NotFoundException;
 use Cake\ORM\TableRegistry;
 
 /**
@@ -24,11 +26,20 @@ class ArticlesController extends AppController
     {
         $this->loadComponent('Paginator');
 
+        // There is nothing particularly wrong with this comment, especially for the educational nature of what we are doing with Camelot.
+        // However, if I was doing this in a different project, I'd remove the comment, and extract the finder code into a method.
+        // That way you get:
+        //
+        //   $articles = $this->Paginator->paginate($this->nonArchivedArticles()), or
+        //   $articles = $this->Paginator->paginate($this->Articles->nonArchived())
+        //
+        // Hopefully you agree that the above doesn't require a comment, because it reads almost like English text "paginate non archived articles".
+        // However, I'm erring on the side of not extracting each piece of logic into a separate function because it is not typical of what our students would be expected to do.
+
         // Only displaying non-archived articles
         $articles = $this->Paginator->paginate($this->Articles->find('all')->where(['Articles.archived'=> false])->contain([]));
         $this->set(compact('articles'));
     }
-
 
     /**
      * This checks for articles containing an exact phrase in either the title or the body.
@@ -111,7 +122,7 @@ class ArticlesController extends AppController
      *          'title LIKE' => "%{$query}%",
      *      ]
      *  ]);
-     * 
+     *
      * The trick with this statement is to read it inside out, instead of from top to bottom. If I read it in English
      * from top to bottom, I get: "Find where or body like ... title like ...". The "or" is out of place in this sentence.
      * Instead, I read the bit inside the where() method inside out: "Find where body like ... or title like ...".
@@ -143,7 +154,7 @@ class ArticlesController extends AppController
      * "Find where AND OR body like ... title like ... OR body like ... title like ...", read it as follows:
      * "Find where body like OR ... title like ... AND body like ... OR title like ...". It takes a bit of practice to
      * be able to read these arrays in this manner when building conditions for a where() function.
-     * 
+     *
      * Of course, we don't know how many query terms will actually be present. This depends on what the user types. There
      * could be one term, there could be 1000. As such, we need to loop over all of the query terms and build up an
      * array of conditions, which is done in this method, but will be left out of the rest of this documentation.
@@ -248,13 +259,20 @@ class ArticlesController extends AppController
     public function view($slug = null)
     {
         $article = $this->Articles->findBySlug($slug)->firstOrFail();
-        $view = new ArticleView([
-            'article_id' => $article->id,
-            'user_id' => $this->Auth->user()['id']
-        ]);
-        $this->ArticleViews->save($view);
-        $this->viewBuilder()->setLayout('default');
-        $this->set(compact('article'));
+
+        // Only show published articles to guest users. Alternatively, admin users can see any article regardless
+        // of the published status.
+        if ($article->published || Role::isAdmin($this->Auth->user())) {
+            $view = new ArticleView([
+                'article_id' => $article->id,
+                'user_id' => $this->Auth->user()['id']
+            ]);
+            $this->ArticleViews->save($view);
+            $this->viewBuilder()->setLayout('default');
+            $this->set(compact('article'));
+        } else {
+            throw new NotFoundException("Article not found");
+        }
     }
 
     public function add()
@@ -282,18 +300,26 @@ class ArticlesController extends AppController
 
     public function hide($id=null){
         $article = $this->Articles->get($id);
+        if ($article == null) {
+            throw new NotFoundException();
+        }
 
         $article->published = false;
 
         if ($this->Articles->save($article)) {
             $this->Flash->success(__('Your article is now hidden.'));
-            return $this->redirect(['action' => 'index']);
+        } else {
+            $this->Flash->error(__('Unable to hide your article.'));
         }
-        $this->Flash->error(__('Unable to hide your article.'));
+
+        return $this->redirect(['action' => 'index']);
     }
 
     public function archive($id=null){
         $article = $this->Articles->get($id);
+        if ($article == null) {
+            throw new NotFoundException();
+        }
 
         // If an article is archived, it is "unpublished" as well
         $article->archived = true;
@@ -301,31 +327,45 @@ class ArticlesController extends AppController
 
         if ($this->Articles->save($article)) {
             $this->Flash->success(__('Your article has been archived.'));
-            return $this->redirect(['action' => 'index']);
+        } else {
+            $this->Flash->error(__('Unable to archive your article.'));
         }
-        $this->Flash->error(__('Unable to archive your article.'));
+
+        return $this->redirect(['action' => 'index']);
     }
 
     public function restore($id=null){
         $article = $this->Articles->get($id);
+        if ($article == null) {
+            throw new NotFoundException();
+        }
+
         $article->archived = false;
 
         if ($this->Articles->save($article)) {
             $this->Flash->success(__('Your article has been restored.'));
-            return $this->redirect(['action' => 'archiveIndex']);
+        } else {
+            $this->Flash->error(__('Unable to restore your article.'));
         }
-        $this->Flash->error(__('Unable to restore your article.'));
+
+        return $this->redirect(['action' => 'archiveIndex']);
     }
 
     public function publish($id=null){
         $article = $this->Articles->get($id);
+        if ($article == null) {
+            throw new NotFoundException();
+        }
+
         $article->published = true;
 
         if ($this->Articles->save($article)) {
             $this->Flash->success(__('Your article has been published.'));
-            return $this->redirect(['action' => 'index']);
+        } else {
+            $this->Flash->error(__('Unable to publish your article.'));
         }
-        $this->Flash->error(__('Unable to publish your article.'));
+
+        return $this->redirect(['action' => 'index']);
     }
 
     public function edit($slug)
@@ -380,14 +420,14 @@ class ArticlesController extends AppController
         ]);
     }
 
-    public function archiveIndex(){
-            $archivedArticles = TableRegistry::get('Articles')->find('all')->where(['Articles.archived'=> true])->contain([]);
-            $this->set('archivedArticles', $this->paginate($archivedArticles));
+    public function archiveIndex() {
+        $archivedArticles = TableRegistry::get('Articles')->find('all')->where(['Articles.archived'=> true])->contain([]);
+        $this->set('archivedArticles', $this->paginate($archivedArticles));
     }
 
     public function isAuthorized($user)
     {
-        return $this->Auth->user('role') > 2;
+        return Role::isAdmin($user['role']);;
     }
 
 }

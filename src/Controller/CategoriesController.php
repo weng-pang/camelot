@@ -1,8 +1,6 @@
 <?php
 namespace App\Controller;
-
-use App\Controller\AppController;
-use Cake\ORM\TableRegistry;
+use App\Model\Entity\Role;
 
 /**
  * Categories Controller
@@ -22,7 +20,7 @@ class CategoriesController extends AppController
 
     public function isAuthorized($user)
     {
-        return $this->Auth->user('role') > 2;
+        return Role::isAdmin($user['role']);
     }
 
     /**
@@ -47,6 +45,8 @@ class CategoriesController extends AppController
     public function view($id = null)
     {
         $category = $this->Categories->get($id, [
+            // If you use Camelot for a huge website like eBay, this wont work very well.
+            // For example, including all of the "Product" records for the "Phone Accessories" category would be a very large number of items :)
             'contain' => ['Products']
         ]);
 
@@ -70,7 +70,8 @@ class CategoriesController extends AppController
             }
             $this->Flash->error(__('The category could not be saved. Please, try again.'));
         }
-        $this->set(compact('category'));
+
+        $this->set('category', $category);
     }
 
     /**
