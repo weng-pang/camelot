@@ -1,4 +1,5 @@
 # Camelot
+This is a demonstration site to unveil some of the capabilities from CakePHP.
 
 ## Built-in Sever (For development purpose only)
 To load the built-in web server, type this command:
@@ -10,7 +11,7 @@ Follow the prompt to access the site.
 ## Demonstration Mode
 The Demonstration Mode allows anyone to login to the backend area as an admin.<br />
 Possible use case: To let the site owner gaining access back after losing the password.<br />
-This mode must be switched off for production, to prevent data breach.
+This mode must be switched **OFF** for production, to prevent data breach.
 
 To toggle demonstration mode, type in this command:
 ````
@@ -19,7 +20,18 @@ bin/cake toggle_demonstration_mode
 Then follow the prompts.
 
 ## Date Backup & Restore
-Camelot has a built-in mechanism to backup and restore data via the command prompt.
+Camelot has a built-in mechanism to backup and restore data via the shell (command prompt).
+### Database backup (Articles)
+The backup command backs up Articles repository into SQL schema file.<br />
+The backup SQL schema file can be found in ``config\schema\``
+
+To perform backup, run this command:
+````
+bin/cake dump_articles
+````
+
+Note: Currently Camelot has Article backup feature only. Full site backup is under development.
+
 ### Database reset
 The reset feature regenerates the prescribed database for Camelot.<br />
 Possible use case: Camelot is deployed to a new site.<br />
@@ -33,9 +45,9 @@ bin/cake reset_database
 To gain admin access, please follow the [Demonstration Mode](#demonstration-mode).
 
 ## New Features
-New features should be forward to Peter S.
+New features should be forward to [Peter Serwylo](peter.serwylo@monash.edu).
 
-### Licenses
+## Licenses
 
 * Public template - [Clean Blog](https://startbootstrap.com/template-overviews/clean-blog/) template licensed under the MIT license.
 * Admin template - [Module Admin](https://modularcode.io/modular-admin-html) template licensed under the MIT license.
