@@ -39,13 +39,13 @@ Follow the prompt to access the site, typically by opening a browser and navigat
 
 ## Demonstration Mode
 
-The Demonstration Mode allows anyone to login to the backend area as an admin.
+**WARNING**:This mode must be switched **OFF** for production, to prevent data breach.
+
+Camelot has a "Demonstration Mode" to allow anyone visitor to login to the backend area as an admin.
 
 Possible use case: To let the site owner gaining access back after losing the password.
 
-**WARNING**:This mode must be switched **OFF** for production, to prevent data breach.
-
-To toggle demonstration mode, type in this command:
+To toggle demonstration mode, run this command from your terminal:
 
 ```
 bin/cake toggle_demonstration_mode
