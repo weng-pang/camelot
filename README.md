@@ -59,6 +59,25 @@ Then follow the prompts.
 Camelot has a built-in mechanism to backup and restore data via the shell (command prompt).
 
 
+### Database reset
+
+The reset feature regenerates the prescribed database for Camelot.
+
+Possible use case: Camelot is deployed to a new site.
+
+Requirement: A new database is created and connection settings are applied in `config/App.php`
+
+**WARNING**: Any current entries (Everything) to Camelot will be overwritten completely. Please use with care.
+
+Run this command:
+
+```
+bin/cake reset_database
+```
+
+To gain admin access, please follow the [Demonstration Mode](#demonstration-mode).
+
+
 ### Database backup-Articles Only
 
 Requirement: This backup requires the use of mysqldump application. See Note 2 for details
@@ -77,25 +96,6 @@ Note:
 
 1. Currently Camelot has Article backup feature only. Full site backup is under development.
 2. Some web servers do not provide the PATH reference to mysqldump. For WAMP servers, a PATH must be manually added. The new PATH should look like `C:\wamp64\bin\mysql\mysq(Version No.)\bin`
-
-
-### Database reset
-
-The reset feature regenerates the prescribed database for Camelot.
-
-Possible use case: Camelot is deployed to a new site.
-
-Requirement: A new database is created and connection settings are applied in `config/App.php`
-
-**WARNING**: Any current entries (Everything) to Camelot will be overwritten completely. Please use with care.
-
-Run this command:
-
-```
-bin/cake reset_database
-```
-
-To gain admin access, please follow the [Demonstration Mode](#demonstration-mode).
 
 
 ## New Features
