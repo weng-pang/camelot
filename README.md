@@ -1,15 +1,17 @@
 # Camelot
 
-This is a demonstration application to unveil some of the capabilities from CakePHP.
+This is a demonstration application to showcase some of the capabilities from CakePHP.
 
 
-### Hardware Requirement
+## Requirements
 
-The Camelot application uses CakePHP framework, and it has the same [hardware requirement](https://book.cakephp.org/3.0/en/installation.html).
+The Camelot application uses CakePHP 3.6 framework, and it has the same [hardware and software requirements](https://book.cakephp.org/3.0/en/installation.html).
 
 Reading the [installation instruction](https://book.cakephp.org/3.0/en/installation.html#requirements) is highly recommended.
 
-To use [Backup and Recovery](#data-backup-and-restore), the MySQL database engine is recommended. This is particularly applicable to [Database Backup](#database-backup-(articles)).
+You can use any database server supported by CakePHP.
+However, Camelot provides some convenience tools to [backup and restore](#data-backup-and-restore) the database, which require a MySQL database.
+This is particularly applicable to [backing up articles](#database-backup-(articles)).
 
 
 ## Recommended Installation Procedures
