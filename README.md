@@ -19,7 +19,7 @@ This is particularly applicable to [backing up articles](#database-backup-(artic
 After this application is obtained from the git repository, please follow these steps before performing any other works:
 
 1. Run `composer install`
-2. Perform [Database Reset](#database-reset)
+2. Perform [Database Reset](#database-initialization-and-reset)
 3. Toggle [Demonstration mode](#demonstration-mode)
 4. Run [Built-in Server](#built-in-sever) if it is under development 
 
@@ -59,15 +59,18 @@ Then follow the prompts.
 Camelot has a built-in mechanism to backup and restore data via the shell (command prompt).
 
 
-### Database reset
+### Database initialization and reset
+
+**WARNING**: Any current entries (everything) to Camelot will be overwritten completely. Please use with care.
 
 The reset feature regenerates the prescribed database for Camelot.
 
-Possible use case: Camelot is deployed to a new site.
+Possible use cases:
 
-Requirement: A new database is created and connection settings are applied in `config/App.php`
+ * When Camelot is deployed to a new site.
+ * After testing, to restore the database content to something more meaningful.
 
-**WARNING**: Any current entries (Everything) to Camelot will be overwritten completely. Please use with care.
+Requirement: A database exists, and its connection settings are applied in `config/App.php`
 
 Run this command:
 
@@ -75,7 +78,7 @@ Run this command:
 bin/cake reset_database
 ```
 
-To gain admin access, please follow the [Demonstration Mode](#demonstration-mode).
+To gain admin access, please follow the [Demonstration Mode](#demonstration-mode) documentation.
 
 
 ### Database backup-Articles Only
