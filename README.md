@@ -14,7 +14,7 @@ However, Camelot provides some convenience tools to [backup and restore](#data-b
 This is particularly applicable to [backing up articles](#database-backup-(articles)).
 
 
-## Recommended Installation Procedures
+## Recommended Installation Procedure
 
 After this application is obtained from the git repository, please follow these steps before performing any other works:
 
@@ -28,13 +28,13 @@ After this application is obtained from the git repository, please follow these 
 
 Note: For development purpose only
 
-To load the built-in web server, type this command:
+To load the built-in web server, type this command from your terminal from the same directory as this git repository:
 
 ```
 bin/cake server
 ```
 
-Follow the prompt to access the site.
+Follow the prompt to access the site, typically by opening a browser and navigating to `http://localhost:8765/`.
 
 
 ## Demonstration Mode
