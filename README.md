@@ -48,7 +48,7 @@ Possible use case: To let the site owner gaining access back after losing the pa
 To toggle demonstration mode, run this command from your terminal:
 
 ```
-bin/cake toggle_demonstration_mode
+bin/cake toggle_demo_mode
 ```
 
 Then follow the prompts.
