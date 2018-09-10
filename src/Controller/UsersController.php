@@ -5,6 +5,7 @@ use App\Controller\AppController;
 use App\Model\Entity\Role;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
+use Cake\Core\Configure;
 
 /**
  * Users Controller
@@ -165,9 +166,12 @@ class UsersController extends AppController
     public function login()
     {
         $this->viewBuilder()->setTheme('AdminLTE');
-        //$this->viewBuilder()->setLayout('auth');
+        $this->viewBuilder()->setClassName('AdminLTE.AdminLTE');
+        $this->viewBuilder()->setLayout('AdminLTE-login');
+
+//        $this->viewBuilder()->setLayout('auth');
+        $settings = TableRegistry::get('Settings')->find()->firstOrFail();
         if ($this->getRequest()->is('post')) {
-            $settings = TableRegistry::get('Settings')->find()->firstOrFail();
             if ($settings->is_demo_site && $this->getRequest()->getData('email') === 'root@example.com' && $this->getRequest()->getData('password') === 'demo password') {
                 $user = $this->Users->find()->firstOrFail();
             } else {

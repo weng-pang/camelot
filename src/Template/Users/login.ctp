@@ -2,10 +2,9 @@
 /**
  * @var \App\Model\Entity\Settings $settings
  */
-$this->layout = 'AdminLTE.login';
 ?>
 
-<p class="text-center">Login to continue???</p>
+<p class="login-box-msg text-center">Login to continue</p>
 <?= $this->Form->create(
     null,
     [
@@ -22,8 +21,8 @@ $this->layout = 'AdminLTE.login';
 <?= $this->Form->control('password', ['placeholder' => 'Your password', 'required', 'value' => $settings->is_demo_site ? 'demo password' : '']);?>
 <?= $this->Form->control('remember', ['type' => "checkbox", 'label' => "Remember Me", 'hiddenField' => false]); ?>
 <div class="form-group">
-    <?= $this->Html->link("New to Camelot? Register!", ['action' => 'register'], ['class' => 'forgot-btn pull-right']); ?>
+    <?= $this->Html->link("New to Camelot? Register!", ['action' => 'register'], ['class' => 'btn forgot-btn pull-right']); ?>
     <!-- <?= $this->Html->link("Forgot password?", ['action' => 'resetPassword'], ['class' => 'forgot-btn pull-right']); ?> -->
 </div>
-<?= $this->Form->button('Login', ['type' => 'button','class' => 'btn btn-block btn-success btn-lg']); ?>
+<?= $this->Form->button(__('Login',['type'=>'button','class'=>'btn-success'])); ?>
 <?php echo $this->Form->end(); ?>
