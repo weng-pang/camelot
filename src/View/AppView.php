@@ -38,6 +38,8 @@ class AppView extends View
     {
         $this->loadHelper('Paginator', ['templates' => 'paginator-templates']);
 
+        $this->loadHelper('Form', ['className' => 'AdminLTE.Form']);
+
         $this->Form->setTemplates(\Cake\Core\Configure::read('FormTemplates.Admin'));
     }
 }

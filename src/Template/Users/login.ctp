@@ -5,7 +5,7 @@
 ?>
 
 
-<p class="text-center">Login to continue</p>
+<p class="text-center">Login to continue???</p>
 <?= $this->Form->create(
     null,
     [
@@ -25,5 +25,5 @@
     <?= $this->Html->link("New to Camelot? Register!", ['action' => 'register'], ['class' => 'forgot-btn pull-right']); ?>
     <!-- <?= $this->Html->link("Forgot password?", ['action' => 'resetPassword'], ['class' => 'forgot-btn pull-right']); ?> -->
 </div>
-<?= $this->Form->button('Login'); ?>
+<?= $this->Form->button('Login', ['type' => 'button','class' => 'btn btn-block btn-success btn-lg']); ?>
 <?php echo $this->Form->end(); ?>

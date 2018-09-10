@@ -164,7 +164,8 @@ class UsersController extends AppController
 
     public function login()
     {
-        $this->viewBuilder()->setLayout('auth');
+        $this->viewBuilder()->setTheme('AdminLTE');
+        //$this->viewBuilder()->setLayout('auth');
         if ($this->getRequest()->is('post')) {
             $settings = TableRegistry::get('Settings')->find()->firstOrFail();
             if ($settings->is_demo_site && $this->getRequest()->getData('email') === 'root@example.com' && $this->getRequest()->getData('password') === 'demo password') {

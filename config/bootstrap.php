@@ -223,3 +223,4 @@ Time::setToStringFormat('d/m/Y');
 FrozenTime::setToStringFormat('d/m/Y');
 
 Plugin::load('Josegonzalez/Upload');
+Plugin::load('AdminLTE', ['bootstrap' => true, 'routes' => true]);

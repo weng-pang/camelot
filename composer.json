@@ -12,6 +12,7 @@
         "ezyang/htmlpurifier": "dev-master",
         "josegonzalez/cakephp-upload": "^4.0",
         "josegonzalez/dotenv": "3.*",
+        "maiconpinto/cakephp-adminlte-theme": "^1.0",
         "mobiledetect/mobiledetectlib": "2.*"
     },
     "require-dev": {
