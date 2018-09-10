@@ -2,8 +2,8 @@
 /**
  * @var \App\Model\Entity\Settings $settings
  */
+$this->layout = 'AdminLTE.login';
 ?>
-
 
 <p class="text-center">Login to continue???</p>
 <?= $this->Form->create(
