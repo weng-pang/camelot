@@ -262,7 +262,7 @@ class ArticlesController extends AppController
 
         // Only show published articles to guest users. Alternatively, admin users can see any article regardless
         // of the published status.
-        if ($article->published || Role::isAdmin($this->Auth->user())) {
+        if ($article->published || Role::isAdmin($this->Auth->user()['role'])) {
             $view = new ArticleView([
                 'article_id' => $article->id,
                 'user_id' => $this->Auth->user()['id']
